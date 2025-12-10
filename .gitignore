@@ -1,0 +1,10 @@
+# IDE files
+.idea/
+
+# macOS
+.DS_Store
+
+# Backup files
+*.bak
+*~
+

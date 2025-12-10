@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DApp Sovereignty Framework - Complete Analysis</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #0a0a0f;
+            color: #e0e0ff;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1600px; margin: 0 auto; }
+        
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #8888aa;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: 40px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 12px 25px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .tab-button:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tab-button.active {
+            background: #00ffff;
+            color: #0a0a0f;
+            font-weight: 700;
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .main-content {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        @media (max-width: 1200px) {
+            .main-content { flex-direction: column; }
+            .info-container { max-width: 100%; }
+            .info-panel { position: relative !important; top: 0 !important; }
+        }
+        
+        .diagram-container { flex: 1.4; min-width: 0; }
+        .info-container { flex: 1; min-width: 300px; max-width: 550px; }
+        
+        .sovereignty-diagram {
+            width: 100%;
+            height: 750px;
+            display: block;
+        }
+        
+        .diagram-title {
+            text-align: center;
+            color: #00ffff;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .diagram-subtitle {
+            text-align: center;
+            color: #8888aa;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+        }
+        
+        .legend-color {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            flex-shrink: 0;
+        }
+        
+        .ring {
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .ring:hover { opacity: 0.8; }
+        
+        .ring-label {
+            font-size: clamp(11px, 1.5vw, 15px);
+            font-weight: 700;
+            fill: #e0e0ff;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+        
+        .sovereignty-score {
+            font-size: clamp(12px, 1.8vw, 18px);
+            font-weight: 700;
+            fill: #00ffff;
+            text-anchor: middle;
+        }
+        
+        .info-panel {
+            background: rgba(20, 20, 40, 0.9);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 750px;
+            max-height: 750px;
+            overflow-y: auto;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .info-panel:empty::before {
+            content: "👆 Click any ring to view detailed analysis";
+            color: #8888aa;
+            font-style: italic;
+            display: block;
+            text-align: center;
+            padding: 100px 20px;
+            font-size: 1.1rem;
+        }
+        
+        .info-panel h2 {
+            color: #00ffff;
+            margin-top: 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .info-panel h3 {
+            color: #00ffaa;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .info-panel h4 {
+            color: #ff6b6b;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .info-panel p {
+            margin: 10px 0;
+            line-height: 1.7;
+        }
+        
+        .info-panel ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+        
+        .info-panel li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .power-holder {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .power-holder h4 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+        
+        .constraint { color: #ffaa00; font-weight: 600; }
+        
+        .info-section {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 3px solid #00ffff;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .score-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00ffff, #00aaff);
+            color: #0a0a0f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 DApp Sovereignty Framework</h1>
+        <p class="subtitle">Comprehensive Analysis: User + Developer = Overall DApp Sovereignty</p>
+        
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="switchTab('user')">
+                👥 User Sovereignty
+            </button>
+            <button class="tab-button" onclick="switchTab('developer')">
+                👨‍💻 Developer Sovereignty
+            </button>
+            <button class="tab-button" onclick="switchTab('overall')">
+                🎯 Overall DApp
+            </button>
+        </div>
+        
+        <!-- USER SOVEREIGNTY TAB -->
+        <div id="user-tab" class="tab-content active">
+            <div class="main-content">
+                <div class="diagram-container">
+                    <h2 class="diagram-title">👥 User Sovereignty</h2>
+                    <p class="diagram-subtitle">How much control do end-users have over their data?</p>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 107, 107, 0.3);"></div>
+                            <span>Ring 1: Physical (40%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 170, 0, 0.3);"></div>
+                            <span>Ring 2: Network (50%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 255, 0, 0.3);"></div>
+                            <span>Ring 3: Protocol (70%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 170, 0.3);"></div>
+                            <span>Ring 4: Platform (85%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 255, 0.3);"></div>
+                            <span>Ring 5: Cryptographic (90%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 170, 255, 0.7);"></div>
+                            <span>User Agency: 40%</span>
+                        </div>
+                    </div>
+                    
+                    <svg id="user-diagram" class="sovereignty-diagram" viewBox="0 0 1000 1000"></svg>
+                </div>
+                
+                <div class="info-container">
+                    <div id="user-panel" class="info-panel"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DEVELOPER SOVEREIGNTY TAB -->
+        <div id="developer-tab" class="tab-content">
+            <div class="main-content">
+                <div class="diagram-container">
+                    <h2 class="diagram-title">👨‍💻 Developer Sovereignty</h2>
+                    <p class="diagram-subtitle">How much control do YOU have over your DApp infrastructure?</p>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 107, 107, 0.3);"></div>
+                            <span>Ring 1: Physical (15%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 170, 0, 0.3);"></div>
+                            <span>Ring 2: Network (10%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 255, 0, 0.3);"></div>
+                            <span>Ring 3: Protocol (70%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 170, 0.3);"></div>
+                            <span>Ring 4: Platform (15%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 255, 0.3);"></div>
+                            <span>Ring 5: Cryptographic (20%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 170, 255, 0.7);"></div>
+                            <span>DApp Agency: 10%</span>
+                        </div>
+                    </div>
+                    
+                    <svg id="developer-diagram" class="sovereignty-diagram" viewBox="0 0 1000 1000"></svg>
+                </div>
+                
+                <div class="info-container">
+                    <div id="developer-panel" class="info-panel"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- OVERALL SOVEREIGNTY TAB -->
+        <div id="overall-tab" class="tab-content">
+            <div class="main-content">
+                <div class="diagram-container">
+                    <h2 class="diagram-title">🎯 Overall DApp Sovereignty</h2>
+                    <p class="diagram-subtitle">MIN(User, Developer) = Combined Sovereignty</p>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 107, 107, 0.3);"></div>
+                            <span>Ring 1: Physical (15%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 170, 0, 0.3);"></div>
+                            <span>Ring 2: Network (10%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 255, 0, 0.3);"></div>
+                            <span>Ring 3: Protocol (70%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 170, 0.3);"></div>
+                            <span>Ring 4: Platform (15%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 255, 0.3);"></div>
+                            <span>Ring 5: Cryptographic (20%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 170, 255, 0.7);"></div>
+                            <span>Overall: 10%</span>
+                        </div>
+                    </div>
+                    
+                    <svg id="overall-diagram" class="sovereignty-diagram" viewBox="0 0 1000 1000"></svg>
+                </div>
+                
+                <div class="info-container">
+                    <div id="overall-panel" class="info-panel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+        
+        // USER SOVEREIGNTY DATA
+        const USER_DATA = {
+            ring1: {
+                name: "PHYSICAL SOVEREIGNTY",
+                radius: 450,
+                color: "rgba(255, 107, 107, 0.3)",
+                strokeColor: "#ff6b6b",
+                sovereignty: 40,
+                powerHolders: [
+                    {
+                        name: "Nation States",
+                        power: "Physical territory, law enforcement, military",
+                        constraint: "Can seize servers, arrest operators, force shutdowns",
+                        resistance: "Very High - Nearly impossible for individuals"
+                    },
+                    {
+                        name: "Data Center Operators",
+                        power: "Physical access to hardware, power supply",
+                        constraint: "Can unplug servers, deny service, inspect hardware",
+                        resistance: "High - Requires distributed infrastructure"
+                    },
+                    {
+                        name: "Hardware Manufacturers",
+                        power: "Supply chain, backdoors, design flaws",
+                        constraint: "Can embed surveillance, create kill switches",
+                        resistance: "High - Requires hardware diversity"
+                    }
+                ],
+                currentPower: "20 countries control most infrastructure • Top 10 data center companies = 70% capacity",
+                decentralization: "Filecoin: ~3,000+ storage providers globally • Bitcoin: ~15,000 nodes",
+                implication: "If a nation state can physically seize servers, all other sovereignty becomes irrelevant"
+            },
+            ring2: {
+                name: "NETWORK SOVEREIGNTY",
+                radius: 360,
+                color: "rgba(255, 170, 0, 0.3)",
+                strokeColor: "#ffaa00",
+                sovereignty: 50,
+                powerHolders: [
+                    {
+                        name: "ICANN",
+                        power: "Root DNS, domain names, IP allocation",
+                        constraint: "Can revoke domains, control naming system",
+                        resistance: "Very High - Global monopoly"
+                    },
+                    {
+                        name: "Regional Internet Registries",
+                        power: "IP address allocation (ARIN, RIPE, APNIC, etc.)",
+                        constraint: "Control who gets IP blocks",
+                        resistance: "Very High - Required for routing"
+                    },
+                    {
+                        name: "Tier 1 ISPs",
+                        power: "BGP routing, backbone infrastructure",
+                        constraint: "Can blackhole routes, drop traffic",
+                        resistance: "Very High - Control internet paths"
+                    },
+                    {
+                        name: "National ISPs",
+                        power: "Last-mile connectivity, DNS resolvers",
+                        constraint: "Can block sites, inspect traffic, throttle",
+                        resistance: "High - Can be bypassed with VPN/Tor"
+                    }
+                ],
+                currentPower: "ICANN controls DNS root • 5 RIRs control IP allocation • ~15 Tier 1 ISPs control backbone",
+                decentralization: "libp2p: Overlay network • Tor: Onion routing • ENS: Decentralized naming",
+                implication: "If ISP blocks IPFS ports or country operates firewall, protocol sovereignty is constrained"
+            },
+            ring3: {
+                name: "PROTOCOL SOVEREIGNTY",
+                radius: 270,
+                color: "rgba(255, 255, 0, 0.3)",
+                strokeColor: "#ffff00",
+                sovereignty: 70,
+                powerHolders: [
+                    {
+                        name: "Protocol Labs",
+                        power: "IPFS/Filecoin development, reference implementations",
+                        constraint: "Can push protocol changes, coordinate upgrades",
+                        resistance: "Medium - Open source, can be forked"
+                    },
+                    {
+                        name: "Filecoin Foundation",
+                        power: "Network governance, grants, ecosystem direction",
+                        constraint: "Can influence protocol development",
+                        resistance: "Medium - Community can resist"
+                    },
+                    {
+                        name: "Storage Provider Cartels",
+                        power: "Can refuse protocol upgrades, coordinate behavior",
+                        constraint: "Can fragment network, refuse to serve",
+                        resistance: "Medium - Market competition helps"
+                    }
+                ],
+                currentPower: "Protocol Labs: Core dev • Filecoin Foundation: Governance • Large SPs: Economic influence",
+                decentralization: "Open-source code • FIP process • Multiple implementations • Cryptographic proofs",
+                implication: "If protocol adds censorship or KYC, platform-level sovereignty is constrained"
+            },
+            ring4: {
+                name: "PLATFORM SOVEREIGNTY",
+                radius: 180,
+                color: "rgba(0, 255, 170, 0.3)",
+                strokeColor: "#00ffaa",
+                sovereignty: 85,
+                powerHolders: [
+                    {
+                        name: "Lighthouse",
+                        power: "API keys, gateway infrastructure, deal aggregation",
+                        constraint: "Can shut down service, change pricing, alter features",
+                        resistance: "Medium-High - Service dependency"
+                    },
+                    {
+                        name: "Storacha (web3.storage)",
+                        power: "Hosting infrastructure, UCAN services, gateway",
+                        constraint: "Can terminate service, change ToS, alter features",
+                        resistance: "Medium - Better than API key model"
+                    },
+                    {
+                        name: "Public IPFS Gateways",
+                        power: "HTTP access to IPFS network",
+                        constraint: "Can go offline, block content, rate limit",
+                        resistance: "Medium - Multiple alternatives exist"
+                    },
+                    {
+                        name: "Your DApp",
+                        power: "User interface, convenience features, documentation",
+                        constraint: "Can shut down, change features, require updates",
+                        resistance: "Low - User can bypass if Ring 5 is strong"
+                    }
+                ],
+                currentPower: "Lighthouse: Centralized API keys • Storacha: Better (UCAN) but still a service",
+                decentralization: "UCAN: User-owned identity • Multiple gateways • Direct smart contract access",
+                implication: "If platform shuts down with API key model, user loses identity—even if data exists"
+            },
+            ring5: {
+                name: "CRYPTOGRAPHIC SOVEREIGNTY",
+                radius: 90,
+                color: "rgba(0, 255, 255, 0.3)",
+                strokeColor: "#00ffff",
+                sovereignty: 90,
+                powerHolders: [
+                    {
+                        name: "Key Management Services",
+                        power: "Store/manage private keys",
+                        constraint: "Can lose keys, get hacked, refuse access",
+                        resistance: "High - Single point of failure"
+                    },
+                    {
+                        name: "Wallet Providers",
+                        power: "Sign transactions, encrypt/decrypt",
+                        constraint: "Can block operations, leak keys",
+                        resistance: "Medium - Can use hardware wallets"
+                    },
+                    {
+                        name: "Browser Vendors",
+                        power: "WebCrypto API, sandboxing",
+                        constraint: "Can disable crypto, introduce vulnerabilities",
+                        resistance: "Medium - Can verify, use native apps"
+                    },
+                    {
+                        name: "Encryption Service Providers",
+                        power: "Kavach (Lighthouse), Lit Protocol",
+                        constraint: "Can refuse to decrypt, lose keys, shut down",
+                        resistance: "High - If you depend on them"
+                    }
+                ],
+                currentPower: "Most users: MetaMask, browser crypto • Many use custodial wallets",
+                decentralization: "WebCrypto API • Hardware wallets • Open-source crypto • Client-side encryption",
+                implication: "If you don't control encryption keys, you don't control access—regardless of storage"
+            },
+            center: {
+                name: "USER AGENCY",
+                radius: 50,
+                color: "rgba(0, 170, 255, 0.7)",
+                strokeColor: "#00aaff",
+                sovereignty: 40,
+                capabilities: [
+                    "Store data permanently",
+                    "Retrieve data without permission",
+                    "Control who accesses data",
+                    "Move to different application",
+                    "Prove ownership cryptographically",
+                    "Resist censorship attempts",
+                    "Survive platform shutdowns",
+                    "Operate pseudonymously/anonymously"
+                ],
+                calculation: "MIN(40%, 50%, 70%, 85%, 90%) = 40%",
+                principle: "Sovereignty is only as strong as the weakest outer ring"
+            }
+        };
+        
+        // DEVELOPER SOVEREIGNTY DATA
+        const DEVELOPER_DATA = {
+            ring1: {
+                name: "PHYSICAL SOVEREIGNTY",
+                radius: 450,
+                color: "rgba(255, 107, 107, 0.3)",
+                strokeColor: "#ff6b6b",
+                sovereignty: 15,
+                powerHolders: [
+                    {
+                        name: "Vercel / Netlify",
+                        power: "Host your frontend, control deployment",
+                        constraint: "Can terminate service, change pricing, delete deployments",
+                        resistance: "High - You're dependent on their infrastructure"
+                    },
+                    {
+                        name: "AWS / GCP / Azure",
+                        power: "Cloud infrastructure, compute, storage",
+                        constraint: "Can shut down accounts, change ToS, increase prices",
+                        resistance: "High - Lock-in through proprietary APIs"
+                    },
+                    {
+                        name: "Data Center Operators",
+                        power: "Physical servers if you self-host",
+                        constraint: "Can deny service, inspect hardware, raise costs",
+                        resistance: "Medium - Can switch providers"
+                    }
+                ],
+                currentPower: "Most DApps: Vercel (15%) or AWS (20%) • Self-hosting rare • IPFS pinning: 60-85%",
+                decentralization: "IPFS self-pinning: 85% • Fleek (IPFS service): 60% • Traditional hosting: 15-20%",
+                implication: "If Vercel bans you, your users lose access to your DApp—even if data is on IPFS"
+            },
+            ring2: {
+                name: "NETWORK SOVEREIGNTY",
+                radius: 360,
+                color: "rgba(255, 170, 0, 0.3)",
+                strokeColor: "#ffaa00",
+                sovereignty: 10,
+                powerHolders: [
+                    {
+                        name: "Domain Registrars",
+                        power: "Control .com/.io/.app domains",
+                        constraint: "Can revoke domains, block transfers, change pricing",
+                        resistance: "Very High - ICANN-controlled system"
+                    },
+                    {
+                        name: "ICANN / DNS System",
+                        power: "Root DNS, domain namespace",
+                        constraint: "Can disable domains, block TLDs",
+                        resistance: "Very High - Global monopoly"
+                    },
+                    {
+                        name: "CDN Providers",
+                        power: "Content distribution, DDoS protection",
+                        constraint: "Can refuse service, block content",
+                        resistance: "Medium - Multiple alternatives"
+                    }
+                ],
+                currentPower: "GoDaddy/Namecheap: 10% • Cloudflare: 30% • ENS .eth: 80% • Direct IPFS CID: 90%",
+                decentralization: "ENS: Ethereum-based naming (80%) • Handshake: Decentralized DNS • Direct CID access",
+                implication: "If registrar seizes your domain, users can't find your DApp"
+            },
+            ring3: {
+                name: "PROTOCOL SOVEREIGNTY",
+                radius: 270,
+                color: "rgba(255, 255, 0, 0.3)",
+                strokeColor: "#ffff00",
+                sovereignty: 70,
+                powerHolders: [
+                    {
+                        name: "Protocol Labs / Filecoin Foundation",
+                        power: "IPFS/Filecoin protocol development",
+                        constraint: "Can push breaking changes, deprecate features",
+                        resistance: "Medium - Open source, can fork"
+                    },
+                    {
+                        name: "npm / Package Registries",
+                        power: "Dependency distribution",
+                        constraint: "Can delete packages, ban users, change ToS",
+                        resistance: "Medium - Can mirror/vendor dependencies"
+                    },
+                    {
+                        name: "Browser Vendors",
+                        power: "Web APIs, standards implementation",
+                        constraint: "Can deprecate APIs, introduce restrictions",
+                        resistance: "Low - Standards-based"
+                    }
+                ],
+                currentPower: "Assuming IPFS/Filecoin usage (70%) • npm required (40%) • Browsers standard (80%)",
+                decentralization: "Open protocols • Multiple implementations • Can vendor dependencies • Progressive enhancement",
+                implication: "Open protocols give you options, but npm dependency creates vulnerability"
+            },
+            ring4: {
+                name: "PLATFORM SOVEREIGNTY",
+                radius: 180,
+                color: "rgba(0, 255, 170, 0.3)",
+                strokeColor: "#00ffaa",
+                sovereignty: 15,
+                powerHolders: [
+                    {
+                        name: "GitHub",
+                        power: "Code hosting, version control, collaboration",
+                        constraint: "Can delete repos, ban accounts, change features",
+                        resistance: "High - Everyone uses it, network effects"
+                    },
+                    {
+                        name: "GitLab / Bitbucket",
+                        power: "Alternative code hosting",
+                        constraint: "Same centralized risks as GitHub",
+                        resistance: "High - Still centralized platforms"
+                    },
+                    {
+                        name: "CI/CD Platforms",
+                        power: "Build, test, deploy pipelines",
+                        constraint: "Can fail builds, leak secrets, disable accounts",
+                        resistance: "Medium - Can self-host runners"
+                    }
+                ],
+                currentPower: "GitHub monopoly: 15% • Radicle P2P: 95% • GitLab: 20% • Self-hosted Git: 70%",
+                decentralization: "Radicle: P2P Git (95%) • Self-hosted GitLab (70%) • Git protocol itself (100%)",
+                implication: "GitHub can delete your repo. Users can't fork if you're deplatformed."
+            },
+            ring5: {
+                name: "CRYPTOGRAPHIC SOVEREIGNTY",
+                radius: 90,
+                color: "rgba(0, 255, 255, 0.3)",
+                strokeColor: "#00ffff",
+                sovereignty: 20,
+                powerHolders: [
+                    {
+                        name: "GitHub Secrets / CI Secrets",
+                        power: "Store deployment keys, API keys",
+                        constraint: "Can leak secrets, lock accounts, audit access",
+                        resistance: "High - Required for CI/CD"
+                    },
+                    {
+                        name: "Key Management Services",
+                        power: "AWS KMS, Google Secret Manager",
+                        constraint: "Can refuse access, lose keys, change pricing",
+                        resistance: "High - Vendor lock-in"
+                    },
+                    {
+                        name: "Developer Laptops",
+                        power: "Local private keys, signing keys",
+                        constraint: "Can be stolen, hacked, lost",
+                        resistance: "Medium - Your physical security"
+                    }
+                ],
+                currentPower: "Most use GitHub Secrets (20%) • Some use AWS KMS (30%) • Hardware wallets rare (90%)",
+                decentralization: "Hardware wallet signing (90%) • Multisig (80%) • Local keyfiles (50%) • GitHub: 20%",
+                implication: "If GitHub locks you out, you can't deploy. If they leak secrets, you're compromised."
+            },
+            center: {
+                name: "DAPP AGENCY",
+                radius: 50,
+                color: "rgba(0, 170, 255, 0.7)",
+                strokeColor: "#00aaff",
+                sovereignty: 10,
+                capabilities: [
+                    "❌ Can be deplatformed from GitHub",
+                    "❌ Can lose domain name",
+                    "❌ Can be banned from hosting",
+                    "❌ Secrets controlled by platforms",
+                    "⚠️ Protocol is open (good)",
+                    "⚠️ Can migrate with effort",
+                    "⚠️ Users lose access during migration",
+                    "❌ Network effects lock you in"
+                ],
+                calculation: "MIN(15%, 10%, 70%, 15%, 20%) = 10%",
+                principle: "Despite giving users 70-90% sovereignty, YOUR infrastructure has only 10%!"
+            }
+        };
+        
+        // OVERALL SOVEREIGNTY DATA (combines both)
+        const OVERALL_DATA = {
+            ring1: {
+                name: "PHYSICAL",
+                radius: 450,
+                color: "rgba(255, 107, 107, 0.3)",
+                strokeColor: "#ff6b6b",
+                userSov: 40,
+                devSov: 15,
+                combined: 15,
+                explanation: "User data on Filecoin (40%) + Your frontend on Vercel (15%) = MIN = 15%",
+                implication: "If Vercel terminates you, users can't access interface—even if their data is safe on Filecoin"
+            },
+            ring2: {
+                name: "NETWORK",
+                radius: 360,
+                color: "rgba(255, 170, 0, 0.3)",
+                strokeColor: "#ffaa00",
+                userSov: 50,
+                devSov: 10,
+                combined: 10,
+                explanation: "Users can access via IPFS (50%) + Your domain on GoDaddy (10%) = MIN = 10%",
+                implication: "If domain seized, users lose primary way to find your DApp"
+            },
+            ring3: {
+                name: "PROTOCOL",
+                radius: 270,
+                color: "rgba(255, 255, 0, 0.3)",
+                strokeColor: "#ffff00",
+                userSov: 70,
+                devSov: 70,
+                combined: 70,
+                explanation: "Both use open IPFS/Filecoin protocols = 70%",
+                implication: "Protocol layer is strong—this is good! Both can verify and fork if needed."
+            },
+            ring4: {
+                name: "PLATFORM",
+                radius: 180,
+                color: "rgba(0, 255, 170, 0.3)",
+                strokeColor: "#00ffaa",
+                userSov: 85,
+                devSov: 15,
+                combined: 15,
+                explanation: "Users have UCAN identity (85%) + Your code on GitHub (15%) = MIN = 15%",
+                implication: "GitHub can delete your repo. Users keep their identity but lose the application."
+            },
+            ring5: {
+                name: "CRYPTOGRAPHIC",
+                radius: 90,
+                color: "rgba(0, 255, 255, 0.3)",
+                strokeColor: "#00ffff",
+                userSov: 90,
+                devSov: 20,
+                combined: 20,
+                explanation: "Users control keys (90%) + Your secrets in GitHub Actions (20%) = MIN = 20%",
+                implication: "Users safe, but YOUR deployment keys vulnerable to GitHub"
+            },
+            center: {
+                name: "OVERALL SOVEREIGNTY",
+                radius: 50,
+                color: "rgba(0, 170, 255, 0.7)",
+                strokeColor: "#00aaff",
+                sovereignty: 10,
+                calculation: "MIN(15%, 10%, 70%, 15%, 20%) = 10%",
+                principle: "Your developer infrastructure (10%) drags down user sovereignty (40%)",
+                reality: "Even with excellent user sovereignty design, developer dependencies create systemic risk"
+            }
+        };
+        
+        // Drawing function
+        function drawDiagram(svgId, data, panelId, isDev = false, isOverall = false) {
+            const svg = document.getElementById(svgId);
+            svg.innerHTML = '';
+            const centerX = 500, centerY = 500;
+            
+            ['ring1', 'ring2', 'ring3', 'ring4', 'ring5'].forEach(key => {
+                const ring = data[key];
+                
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', centerX);
+                circle.setAttribute('cy', centerY);
+                circle.setAttribute('r', ring.radius);
+                circle.setAttribute('fill', ring.color);
+                circle.setAttribute('stroke', ring.strokeColor);
+                circle.setAttribute('stroke-width', '3');
+                circle.setAttribute('class', 'ring');
+                svg.appendChild(circle);
+                
+                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                label.setAttribute('x', centerX);
+                label.setAttribute('y', centerY - ring.radius - 10);
+                label.setAttribute('class', 'ring-label');
+                label.textContent = ring.name;
+                svg.appendChild(label);
+                
+                const score = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                score.setAttribute('x', centerX);
+                score.setAttribute('y', centerY - ring.radius + 15);
+                score.setAttribute('class', 'sovereignty-score');
+                score.textContent = isOverall ? `${ring.combined}%` : `${ring.sovereignty}%`;
+                svg.appendChild(score);
+                
+                circle.addEventListener('click', () => showInfo(panelId, key, ring, isDev, isOverall));
+            });
+            
+            const center = data.center;
+            const centerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            centerCircle.setAttribute('cx', centerX);
+            centerCircle.setAttribute('cy', centerY);
+            centerCircle.setAttribute('r', center.radius);
+            centerCircle.setAttribute('fill', center.color);
+            centerCircle.setAttribute('stroke', center.strokeColor);
+            centerCircle.setAttribute('stroke-width', '3');
+            centerCircle.setAttribute('class', 'ring');
+            svg.appendChild(centerCircle);
+            
+            const centerLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            centerLabel.setAttribute('x', centerX);
+            centerLabel.setAttribute('y', centerY);
+            centerLabel.setAttribute('class', 'ring-label');
+            centerLabel.textContent = isDev ? 'DAPP' : isOverall ? 'OVERALL' : 'USER';
+            svg.appendChild(centerLabel);
+            
+            const centerScore = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            centerScore.setAttribute('x', centerX);
+            centerScore.setAttribute('y', centerY + 20);
+            centerScore.setAttribute('class', 'sovereignty-score');
+            centerScore.setAttribute('font-size', '16');
+            centerScore.textContent = `${center.sovereignty}%`;
+            svg.appendChild(centerScore);
+            
+            centerCircle.addEventListener('click', () => showInfo(panelId, 'center', center, isDev, isOverall));
+        }
+        
+        // Info display function
+        function showInfo(panelId, ringKey, ring, isDev, isOverall) {
+            const panel = document.getElementById(panelId);
+            let html = '';
+            
+            if (ringKey === 'center') {
+                html = `
+                    <h2>${ring.name}</h2>
+                    <p><strong>Final Score:</strong> <span class="score-badge">${ring.sovereignty}%</span></p>
+                    <p><strong>Calculation:</strong> ${ring.calculation}</p>
+                    <div class="info-section">
+                        <p><strong>Principle:</strong> ${ring.principle}</p>
+                    </div>
+                `;
+                
+                if (isOverall) {
+                    html += `<p style="margin-top: 15px;">${ring.reality}</p>`;
+                }
+                
+                if (ring.capabilities) {
+                    html += '<h3>What This Enables:</h3><ul>';
+                    ring.capabilities.forEach(cap => {
+                        html += `<li>${cap}</li>`;
+                    });
+                    html += '</ul>';
+                }
+            } else if (isOverall) {
+                html = `
+                    <h2>${ring.name} SOVEREIGNTY</h2>
+                    <div class="info-section">
+                        <p><strong>User Sovereignty:</strong> ${ring.userSov}%</p>
+                        <p><strong>Developer Sovereignty:</strong> ${ring.devSov}%</p>
+                        <p><strong>Combined:</strong> MIN(${ring.userSov}%, ${ring.devSov}%) = <span class="score-badge">${ring.combined}%</span></p>
+                    </div>
+                    <p style="margin-top: 15px;"><strong>Explanation:</strong> ${ring.explanation}</p>
+                    <div class="info-section" style="border-left-color: #ffaa00; background: rgba(255, 170, 0, 0.05);">
+                        <p class="constraint"><strong>Implication:</strong> ${ring.implication}</p>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <h2>${ring.name}</h2>
+                    <p><strong>Sovereignty at This Layer:</strong> <span class="score-badge">${ring.sovereignty}%</span></p>
+                    
+                    <h3>Power Holders & Constraints:</h3>
+                `;
+                
+                ring.powerHolders.forEach(holder => {
+                    html += `
+                        <div class="power-holder">
+                            <h4>${holder.name}</h4>
+                            <p><strong>Power:</strong> ${holder.power}</p>
+                            <p class="constraint"><strong>Constraint:</strong> ${holder.constraint}</p>
+                            <p><strong>Resistance Level:</strong> ${holder.resistance}</p>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                    <h3>Current State of Power:</h3>
+                    <div class="info-section">
+                        <p>${ring.currentPower}</p>
+                    </div>
+                    
+                    <h3>Decentralization Attempts:</h3>
+                    <div class="info-section">
+                        <p>${ring.decentralization}</p>
+                    </div>
+                    
+                    <h3>Implication for ${isDev ? 'Your DApp' : 'Users'}:</h3>
+                    <div class="info-section" style="border-left-color: #ffaa00; background: rgba(255, 170, 0, 0.05);">
+                        <p class="constraint">${ring.implication}</p>
+                    </div>
+                `;
+            }
+            
+            panel.innerHTML = html;
+            panel.scrollTop = 0;
+        }
+        
+        // Initialize all diagrams
+        drawDiagram('user-diagram', USER_DATA, 'user-panel', false, false);
+        drawDiagram('developer-diagram', DEVELOPER_DATA, 'developer-panel', true, false);
+        drawDiagram('overall-diagram', OVERALL_DATA, 'overall-panel', false, true);
+        
+        // Show initial info for user diagram
+        showInfo('user-panel', 'center', USER_DATA.center, false, false);
+    </script>
+</body>
+</html>
+
+<!-- Add this after the nav-tabs div and before the first tab-content -->
+<script>
+// First, let's insert the Radicle tab button and content
+document.addEventListener('DOMContentLoaded', function() {
+    // Add tab button
+    const navTabs = document.querySelector('.nav-tabs');
+    const radicleButton = document.createElement('button');
+    radicleButton.className = 'tab-button';
+    radicleButton.onclick = () => switchTab('radicle');
+    radicleButton.innerHTML = '🌱 Case Study: Radicle';
+    navTabs.appendChild(radicleButton);
+    
+    // Add tab content
+    const container = document.querySelector('.container');
+    const radicleTab = document.createElement('div');
+    radicleTab.id = 'radicle-tab';
+    radicleTab.className = 'tab-content';
+    radicleTab.innerHTML = `
+        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #00ffff; text-align: center; margin-bottom: 15px; font-size: 2rem;">🌱 Case Study: Radicle</h2>
+            <p style="text-align: center; color: #8888aa; margin-bottom: 40px; font-size: 1rem;">
+                Achieving 70% Developer Sovereignty through P2P Architecture
+            </p>
+            
+            <div style="background: rgba(255, 170, 0, 0.1); border: 2px solid #ffaa00; border-radius: 10px; padding: 25px; margin-bottom: 30px;">
+                <h3 style="color: #ffaa00; margin-top: 0; font-size: 1.3rem;">🎯 What We're Analyzing</h3>
+                <p style="font-size: 1.05rem;"><strong>Radicle is a DEVELOPER TOOL</strong> (peer-to-peer code collaboration platform), NOT an end-user application.</p>
+                <p style="margin-top: 12px;"><strong>Who are the "users"?</strong> Developers themselves—they use Radicle to collaborate on code.</p>
+                <p style="margin-top: 12px;"><strong>Analysis Type:</strong> Developer/DApp Sovereignty ONLY</p>
+                <p style="margin-top: 15px; font-size: 1.1rem; color: #ffaa00;"><strong>Key Lesson:</strong> Radicle is a blueprint for maximizing YOUR DApp's developer sovereignty—showing how to avoid GitHub/centralized platform dependency.</p>
+            </div>
+            
+            <div style="background: rgba(20, 20, 40, 0.6); border: 2px solid #00ffff; border-radius: 10px; padding: 35px;">
+                <h3 style="color: #00ffff; margin-top: 0; font-size: 1.5rem;">What is Radicle?</h3>
+                <p style="font-size: 1.05rem;">Radicle is a peer-to-peer code collaboration platform built on Git that eliminates the need for centralized forges like GitHub. Developers collaborate directly through a gossip protocol with cryptographic identities.</p>
+                
+                <h4 style="color: #00ffaa; margin-top: 25px; font-size: 1.2rem;">Key Features:</h4>
+                <ul style="line-height: 1.8; font-size: 1.05rem;">
+                    <li><strong>True peer-to-peer:</strong> No central server required</li>
+                    <li><strong>Local-first:</strong> Repositories, issues, and patches stored locally on your device</li>
+                    <li><strong>Cryptographic identity:</strong> Developers identified by keypairs, not usernames</li>
+                    <li><strong>Built on Git:</strong> Extends Git rather than replacing it</li>
+                    <li><strong>Works offline:</strong> Full collaboration capability without internet</li>
+                    <li><strong>No blockchain/cryptocurrency:</strong> Pure p2p protocol</li>
+                </ul>
+                
+                <h3 style="color: #00ffff; margin-top: 35px; font-size: 1.5rem;">📊 Developer Sovereignty Analysis</h3>
+                
+                <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 25px 0; border-radius: 5px;">
+                    <h4 style="color: #00ffaa; margin-top: 0; font-size: 1.2rem;">Ring 4: Platform (Code Hosting)</h4>
+                    <p style="font-size: 1.3rem; font-weight: 700; color: #00ffaa;">95% Sovereignty ⭐</p>
+                    
+                    <p style="margin-top: 15px;"><strong>What Radicle Achieves:</strong></p>
+                    <ul style="line-height: 1.7;">
+                        <li>✅ No GitHub dependency—code hosted peer-to-peer</li>
+                        <li>✅ Peer-to-peer repository replication via gossip protocol</li>
+                        <li>✅ Cryptographic project identities (no accounts)</li>
+                        <li>✅ Can fork and contribute without platform permission</li>
+                        <li>✅ Issues and PRs are local Git objects (portable)</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Power Holders Bypassed:</strong></p>
+                    <ul style="line-height: 1.7;">
+                        <li>❌ GitHub/Microsoft cannot delete your repo</li>
+                        <li>❌ GitLab cannot ban your account</li>
+                        <li>❌ All centralized forges eliminated</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Remaining Constraints:</strong></p>
+                    <ul style="line-height: 1.7;">
+                        <li>⚠️ Optional seed nodes (Radicle Foundation operates some for discoverability)</li>
+                        <li>⚠️ Protocol development coordinated by Radworks</li>
+                        <li>⚠️ Still evolving (some features immature)</li>
+                    </ul>
+                </div>
+                
+                <h4 style="color: #00ffaa; margin-top: 30px; font-size: 1.2rem;">Complete Ring Analysis</h4>
+                
+                <table style="width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.95rem;">
+                    <thead>
+                        <tr style="background: rgba(0, 255, 255, 0.1);">
+                            <th style="padding: 12px; text-align: left; color: #00ffff; border-bottom: 2px solid #00ffff;">Ring</th>
+                            <th style="padding: 12px; text-align: center; color: #00ffff; border-bottom: 2px solid #00ffff;">Score</th>
+                            <th style="padding: 12px; text-align: left; color: #00ffff; border-bottom: 2px solid #00ffff;">Key Achievements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Ring 1: Physical</strong></td>
+                            <td style="padding: 12px; text-align: center; font-weight: 700; color: #ffaa00;">70%</td>
+                            <td style="padding: 12px;">Self-hosted nodes, no data centers needed</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Ring 2: Network</strong></td>
+                            <td style="padding: 12px; text-align: center; font-weight: 700; color: #ffaa00;">70%</td>
+                            <td style="padding: 12px;">P2P gossip protocol, works offline</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Ring 3: Protocol</strong></td>
+                            <td style="padding: 12px; text-align: center; font-weight: 700; color: #00ffaa;">85%</td>
+                            <td style="padding: 12px;">Built on Git, fully open source</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Ring 4: Platform</strong></td>
+                            <td style="padding: 12px; text-align: center; font-weight: 700; color: #00ff00;">95% ⭐</td>
+                            <td style="padding: 12px;">No GitHub! P2P collaboration</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Ring 5: Cryptographic</strong></td>
+                            <td style="padding: 12px; text-align: center; font-weight: 700; color: #00ffaa;">85%</td>
+                            <td style="padding: 12px;">Cryptographic identities, local keys</td>
+                        </tr>
+                        <tr style="background: rgba(0, 255, 255, 0.15);">
+                            <td style="padding: 15px;"><strong>FINAL RESULT</strong></td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; font-size: 1.3rem; color: #00ffff;">70%</td>
+                            <td style="padding: 15px;"><strong>MIN(70, 70, 85, 95, 85)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="background: rgba(0, 255, 255, 0.1); border: 2px solid #00ffff; border-radius: 10px; padding: 20px; margin: 25px 0;">
+                    <h4 style="color: #00ffff; margin-top: 0;">🎯 Result: 70% Developer Sovereignty</h4>
+                    <p style="font-size: 1.15rem;">This is <strong>significantly higher</strong> than projects hosted on GitHub (15%), making Radicle one of the most sovereign developer platforms available.</p>
+                </div>
+                
+                <h3 style="color: #00ffff; margin-top: 35px; font-size: 1.5rem;">📈 Comparison: Radicle vs GitHub</h3>
+                
+                <table style="width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.95rem;">
+                    <thead>
+                        <tr style="background: rgba(0, 255, 255, 0.1);">
+                            <th style="padding: 12px; text-align: left; color: #00ffff; border-bottom: 2px solid #00ffff;">Aspect</th>
+                            <th style="padding: 12px; text-align: center; color: #00ffff; border-bottom: 2px solid #00ffff;">GitHub-Based</th>
+                            <th style="padding: 12px; text-align: center; color: #00ffff; border-bottom: 2px solid #00ffff;">Radicle-Based</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Code Hosting</strong></td>
+                            <td style="padding: 12px; text-align: center; color: #ff6b6b;">Microsoft controls (15%)</td>
+                            <td style="padding: 12px; text-align: center; color: #00ff00;">P2P, no platform (95%)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Developer Identity</strong></td>
+                            <td style="padding: 12px; text-align: center;">GitHub username</td>
+                            <td style="padding: 12px; text-align: center;">Cryptographic keypair</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Issues & PRs</strong></td>
+                            <td style="padding: 12px; text-align: center; color: #ff6b6b;">Platform-locked</td>
+                            <td style="padding: 12px; text-align: center; color: #00ff00;">Local Git objects</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Deplatforming Risk</strong></td>
+                            <td style="padding: 12px; text-align: center; color: #ff6b6b;">High</td>
+                            <td style="padding: 12px; text-align: center; color: #00ff00;">None—no platform</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Offline Collaboration</strong></td>
+                            <td style="padding: 12px; text-align: center;">Read-only</td>
+                            <td style="padding: 12px; text-align: center; color: #00ff00;">Full functionality</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #333;">
+                            <td style="padding: 12px;"><strong>Censorship Resistance</strong></td>
+                            <td style="padding: 12px; text-align: center; color: #ff6b6b;">Low</td>
+                            <td style="padding: 12px; text-align: center; color: #00ff00;">High</td>
+                        </tr>
+                        <tr style="background: rgba(0, 255, 255, 0.1);">
+                            <td style="padding: 15px;"><strong>Developer Sovereignty</strong></td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; font-size: 1.2rem; color: #ff6b6b;">15%</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; font-size: 1.2rem; color: #00ffff;">70%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 style="color: #00ffff; margin-top: 35px; font-size: 1.5rem;">💡 Key Lessons for Your DApp</h3>
+                
+                <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 20px 0; border-radius: 5px;">
+                    <h4 style="color: #00ffaa; margin-top: 0;">1. Eliminate Platform Dependency (Ring 4)</h4>
+                    <ul style="line-height: 1.7;">
+                        <li>Don't just focus on giving users sovereignty—achieve it for your DApp infrastructure too</li>
+                        <li>Your code shouldn't depend on GitHub staying open to you</li>
+                        <li><strong>Question to ask:</strong> Can your project survive if GitHub bans you tomorrow?</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 20px 0; border-radius: 5px;">
+                    <h4 style="color: #00ffaa; margin-top: 0;">2. Local-First Architecture</h4>
+                    <ul style="line-height: 1.7;">
+                        <li>Everything works offline first</li>
+                        <li>Network is for syncing, not primary operations</li>
+                        <li>Users (developers) have complete local control</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 20px 0; border-radius: 5px;">
+                    <h4 style="color: #00ffaa; margin-top: 0;">3. Cryptographic Identity</h4>
+                    <ul style="line-height: 1.7;">
+                        <li>No accounts/usernames controlled by a platform</li>
+                        <li>Identity is portable across all instances</li>
+                        <li>All actions cryptographically signed and verifiable</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 20px 0; border-radius: 5px;">
+                    <h4 style="color: #00ffaa; margin-top: 0;">4. The Trade-off</h4>
+                    <ul style="line-height: 1.7;">
+                        <li>Higher sovereignty = More complexity for users</li>
+                        <li>Network effects matter (GitHub has more developers)</li>
+                        <li>Less mature tooling ecosystem</li>
+                        <li>Higher cognitive load</li>
+                    </ul>
+                </div>
+                
+                <h3 style="color: #00ffff; margin-top: 35px; font-size: 1.5rem;">🎓 Applying to Your Storage DApp</h3>
+                
+                <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid #333; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+// Your Storage DApp Infrastructure Analysis
+
+User Sovereignty (from User tab):
+- Identity: UCAN (70%)
+- Encryption: Client-side (80%)
+- Retrieval: Multiple gateways (60%)
+→ User Sovereignty = 40% (limited by outer rings)
+
+Developer Sovereignty (typical GitHub stack):
+- Code: GitHub (15%) ← WEAK LINK!
+- Deployment: Vercel (20%) ← WEAK LINK!
+- Domain: GoDaddy (10%) ← WEAKEST LINK!
+- Keys: GitHub Secrets (20%)
+→ Developer Sovereignty = 10%
+
+Overall DApp Sovereignty = MIN(40%, 10%) = 10%
+
+Problem: Your users might have good sovereignty, but YOUR
+infrastructure is highly vulnerable to deplatforming!
+                </div>
+                
+                <h4 style="color: #00ffaa; margin-top: 30px; font-size: 1.2rem;">✅ Better Architecture (Inspired by Radicle)</h4>
+                
+                <div style="background: rgba(0, 255, 0, 0.05); border: 1px solid #00ff00; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+// Radicle-Inspired Sovereign Stack
+
+Developer Sovereignty:
+- Code: Radicle (95%) or GitHub + IPFS backup (60%)
+- Deployment: Self-pinned IPFS (85%)
+- Domain: ENS .eth domain (80%)
+- Keys: Hardware wallet (90%)
+→ Developer Sovereignty = 60-80%
+
+User Sovereignty:
+- Identity: UCAN (70%)
+- Encryption: Client-side + wallet (90%)
+- Retrieval: Multiple gateways + node education (80%)
+→ User Sovereignty = 40% (still limited by outer rings)
+
+Overall DApp Sovereignty = MIN(40%, 60%) = 40%
+
+Result: 4x improvement from 10% → 40%!
+                </div>
+                
+                <div style="background: rgba(255, 107, 107, 0.1); border: 2px solid #ff6b6b; border-radius: 10px; padding: 25px; margin: 30px 0;">
+                    <h4 style="color: #ff6b6b; margin-top: 0; font-size: 1.2rem;">🎯 The Reality Check</h4>
+                    <p style="font-size: 1.05rem;">Most developers still choose GitHub's <strong>15% sovereignty</strong> for the <strong>85% better network effects and tooling</strong>.</p>
+                    <p style="margin-top: 15px;">Radicle proves that <strong>70-95% developer sovereignty is technically achievable</strong>, but it comes with trade-offs:</p>
+                    <ul style="line-height: 1.7;">
+                        <li>Smaller user base / network effects</li>
+                        <li>Less mature CI/CD tooling</li>
+                        <li>Higher learning curve</li>
+                        <li>Slower adoption</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 1.05rem;"><strong>The middle ground:</strong> GitHub + IPFS backup = 60% sovereignty with familiar tools</p>
+                </div>
+                
+                <h3 style="color: #00ffff; margin-top: 35px; font-size: 1.5rem;">📚 Resources</h3>
+                <ul style="line-height: 1.8; font-size: 1.05rem;">
+                    <li><a href="https://radicle.xyz" style="color: #00ffff; text-decoration: none;">radicle.xyz</a> - Official website</li>
+                    <li><a href="https://radicle.xyz/guides/protocol" style="color: #00ffff; text-decoration: none;">Protocol Guide</a> - Technical documentation</li>
+                    <li><a href="https://github.com/radicle-dev" style="color: #00ffff; text-decoration: none;">Radicle on GitHub</a> - They use it for reach</li>
+                    <li><a href="https://radicle.xyz/desktop" style="color: #00ffff; text-decoration: none;">Radicle Desktop App</a> - Get started</li>
+                </ul>
+            </div>
+        </div>
+    `;
+    
+    container.appendChild(radicleTab);
+});
+</script>

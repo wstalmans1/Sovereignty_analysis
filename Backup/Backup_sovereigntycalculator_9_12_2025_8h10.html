@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Sovereignty Framework - Radial Model</title>
+    <style>
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #0a0a0f;
+            color: #e0e0ff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #8888aa;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: 40px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .tab-button {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 12px 30px;
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .tab-button:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tab-button.active {
+            background: #00ffff;
+            color: #0a0a0f;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .diagram-container {
+            flex: 1.4;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #sovereignty-diagram {
+            width: 100%;
+            height: 750px;
+            display: block;
+        }
+        
+        .info-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+        }
+        
+        .info-container h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            font-weight: 700;
+        }
+        
+        @media (max-width: 1200px) {
+            body {
+                font-size: 13px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .info-container {
+                max-width: 100%;
+            }
+            
+            .info-panel {
+                height: auto;
+                max-height: 700px;
+                position: relative;
+                top: 0;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                font-size: 12px;
+                padding: 15px;
+            }
+            
+            .legend-color {
+                width: 20px;
+                height: 20px;
+            }
+            
+            #sovereignty-diagram {
+                height: 700px;
+            }
+            
+            .info-panel {
+                height: auto;
+                max-height: 500px;
+            }
+        }
+        
+        .ring {
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .ring:hover {
+            opacity: 0.8;
+        }
+        
+        .ring-label {
+            font-size: clamp(12px, 1.5vw, 16px);
+            font-weight: 700;
+            fill: #e0e0ff;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+        
+        .sovereignty-score {
+            font-size: clamp(14px, 2vw, 20px);
+            font-weight: 700;
+            fill: #00ffff;
+            text-anchor: middle;
+        }
+        
+        .info-panel {
+            background: rgba(20, 20, 40, 0.9);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 18px;
+            height: 750px;
+            overflow-y: auto;
+            position: sticky;
+            top: 20px;
+            font-size: clamp(0.8rem, 1vw, 0.9rem);
+        }
+        
+        .info-panel:empty::before {
+            content: "Click on any ring or the center to view detailed information";
+            color: #8888aa;
+            font-style: italic;
+            display: block;
+            text-align: center;
+            padding: 50px 20px;
+            font-size: clamp(0.8rem, 1vw, 0.9rem);
+        }
+        
+        .info-panel h2 {
+            color: #00ffff;
+            margin-top: 0;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .info-panel h3 {
+            color: #00ffff;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            font-weight: 700;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .info-panel h4 {
+            color: #ff6b6b;
+            font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+            font-weight: 700;
+            margin-top: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .info-panel p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .info-panel ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .info-panel li {
+            margin: 6px 0;
+            line-height: 1.5;
+        }
+        
+        .power-holder {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .constraint {
+            color: #ffaa00;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+            font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+        }
+        
+        th {
+            color: #00ffff;
+            font-weight: 700;
+        }
+        
+        .legend {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            align-items: center;
+            max-width: 100%;
+            width: 100%;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: clamp(0.65rem, 1vw, 0.75rem);
+        }
+        
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            flex-shrink: 0;
+        }
+        
+        /* Calculator styles */
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .calculator-section {
+            background: rgba(20, 20, 40, 0.6);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .calculator-section h3 {
+            color: #00ffff;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ring-number {
+            background: #00ffff;
+            color: #0a0a0f;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .choice-group {
+            margin: 20px 0;
+        }
+        
+        .choice-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8888aa;
+            font-size: 0.9rem;
+        }
+        
+        .choice-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .choice-option {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .choice-option:hover {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .choice-option.selected {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .choice-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ffff;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+        }
+        
+        .choice-option.selected .choice-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #00ffff;
+            border-radius: 50%;
+        }
+        
+        .choice-content {
+            flex: 1;
+        }
+        
+        .choice-title {
+            color: #e0e0ff;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .choice-description {
+            color: #8888aa;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        .choice-sovereignty {
+            color: #00ffff;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 3px solid #00ffff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .final-score {
+            font-size: 4rem;
+            color: #00ffff;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        .score-label {
+            color: #8888aa;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .score-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #00ffff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .score-item-title {
+            color: #00ffff;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .score-item-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .recommendations {
+            background: rgba(255, 170, 0, 0.1);
+            border: 2px solid #ffaa00;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .recommendations h4 {
+            color: #ffaa00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .recommendation-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-left: 3px solid #ffaa00;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 5px;
+        }
+        
+        .recommendation-impact {
+            color: #00ffff;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .warning-box h4 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #00ffff, #00aaff);
+            border: none;
+            color: #0a0a0f;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffaa00, #ffff00, #00ffaa, #00ffff);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            font-weight: 700;
+            color: #0a0a0f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 User Sovereignty Framework</h1>
+        <p class="subtitle">Analyze & Optimize Your DApp's User Sovereignty</p>
+        
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="switchTab('diagram')">
+                📊 Sovereignty Model
+            </button>
+            <button class="tab-button" onclick="switchTab('calculator')">
+                🧮 DApp Calculator
+            </button>
+        </div>
+        
+        <!-- TAB 1: DIAGRAM -->
+        <div id="diagram-tab" class="tab-content active">
+            <div class="main-content">
+                <div class="diagram-container">
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 107, 107, 0.3);"></div>
+                            <span>Ring 1: Physical (40%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 170, 0, 0.3);"></div>
+                            <span>Ring 2: Network (50%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 255, 0, 0.3);"></div>
+                            <span>Ring 3: Protocol (70%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 170, 0.3);"></div>
+                            <span>Ring 4: Platform (85%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 255, 255, 0.3);"></div>
+                            <span>Ring 5: Cryptographic (90%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(0, 170, 255, 0.7);"></div>
+                            <span>Center: User Agency (40%)</span>
+                        </div>
+                    </div>
+                    <svg id="sovereignty-diagram" viewBox="0 0 1000 1000">
+                        <!-- Rings will be drawn here -->
+                    </svg>
+                </div>
+                
+                <div class="info-container">
+                    <h3>Sovereignty Analysis</h3>
+                    <div id="info-panel" class="info-panel"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 2: CALCULATOR -->
+        <div id="calculator-tab" class="tab-content">
+            <div class="calculator-container">
+                <p style="text-align: center; color: #8888aa; margin-bottom: 30px;">
+                    Select your implementation choices for each sovereignty layer.<br>
+                    The calculator will show your final user sovereignty score and recommendations.
+                </p>
+                
+                <!-- Ring 4: Platform -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">4</span>
+                        Platform Sovereignty: Storage Identity Model
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">How do users store data in your DApp?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="4" data-value="20" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">API Key Model (Lighthouse Default)</div>
+                                    <div class="choice-description">
+                                        All users share YOUR API key. Data uploaded to YOUR account.
+                                        Users have no independent identity or namespace.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 20%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="50" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Platform Accounts</div>
+                                    <div class="choice-description">
+                                        Users create accounts on your platform. Data tied to platform identity.
+                                        Export possible but limited portability.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 50%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="70" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">UCAN Identity (Storacha)</div>
+                                    <div class="choice-description">
+                                        Users authenticate with their wallet/keypair. Data namespace owned by user.
+                                        Can access from other UCAN-compatible apps.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 70%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="85" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">UCAN + On-Chain Registry</div>
+                                    <div class="choice-description">
+                                        UCAN identity PLUS user deploys their own smart contract to record CIDs.
+                                        Full ownership proof on-chain. Maximum portability.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 85%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="95" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Direct Filecoin Contracts</div>
+                                    <div class="choice-description">
+                                        Users propose storage deals directly via smart contracts (FRC-0068).
+                                        No platform intermediary. Maximum sovereignty but high complexity.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 95%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ring 5: Cryptographic -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">5</span>
+                        Cryptographic Sovereignty: Encryption & Keys
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">How is data encrypted and who controls keys?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="5" data-value="0" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">No Encryption</div>
+                                    <div class="choice-description">
+                                        Data stored in plaintext. Anyone with CID can read.
+                                        No privacy or access control.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 0%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="5" data-value="30" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Server-Side Encryption (You Hold Keys)</div>
+                                    <div class="choice-description">
+                                        You encrypt data and manage keys on your server.
+                                        Users depend on you for decryption.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 30%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="5" data-value="50" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Managed Encryption (Lighthouse Kavach, Lit Protocol)</div>
+                                    <div class="choice-description">
+                                        Service manages encryption with decentralized key management.
+                                        Better than server-side but still service-dependent.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 50%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="5" data-value="80" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Client-Side Encryption (WebCrypto)</div>
+                                    <div class="choice-description">
+                                        User generates keys in browser. Keys stored in localStorage or exported.
+                                        User has full control but keys can be lost.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 80%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="5" data-value="90" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Client-Side + Wallet Storage</div>
+                                    <div class="choice-description">
+                                        Keys generated client-side and stored in user's hardware wallet (Ledger, MetaMask).
+                                        Maximum practical sovereignty with good UX.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 90%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ring 5b: Retrieval -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">5</span>
+                        Retrieval Sovereignty: Gateway Access
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">How can users retrieve their data?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="5b" data-value="10" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Your API Only</div>
+                                    <div class="choice-description">
+                                        Users can only retrieve data through your custom API.
+                                        Complete dependency on your infrastructure.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 10%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="5b" data-value="30" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Single Gateway (Lighthouse/Storacha)</div>
+                                    <div class="choice-description">
+                                        Data accessible via one centralized IPFS gateway.
+                                        Single point of failure.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 30%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="5b" data-value="60" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Multiple Public Gateways</div>
+                                    <div class="choice-description">
+                                        Provide fallback to public IPFS gateways (ipfs.io, dweb.link, cloudflare, etc).
+                                        Users can switch if primary fails.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 60%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="5b" data-value="80" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Multiple Gateways + Educate About IPFS Node</div>
+                                    <div class="choice-description">
+                                        Multiple gateway fallbacks PLUS documentation on running own IPFS node.
+                                        Empower technical users to be fully independent.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 80%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ring 4b: Economic -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">4</span>
+                        Economic Sovereignty: Payment Model
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">Who pays for storage and how?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="4b" data-value="10" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Free for Users (You Pay)</div>
+                                    <div class="choice-description">
+                                        You subsidize all storage costs. Users pay nothing.
+                                        Complete economic dependency on your business model.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 10%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="40" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Subscription Through You</div>
+                                    <div class="choice-description">
+                                        Users pay you subscription fees. You pay storage provider.
+                                        Users depend on your continued service.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 40%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="70" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Direct Payment to Provider (Storacha Subscription)</div>
+                                    <div class="choice-description">
+                                        Users create own account and pay Storacha/provider directly.
+                                        Economic relationship between user and provider.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 70%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="85" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Perpetual Payment (Lighthouse)</div>
+                                    <div class="choice-description">
+                                        User pays once from wallet for lifetime storage.
+                                        No recurring payments. Managed by smart contracts.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 85%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="95" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Direct Filecoin Deal Payment</div>
+                                    <div class="choice-description">
+                                        User pays storage providers directly via smart contracts.
+                                        User negotiates terms and manages deals. Maximum autonomy.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 95%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateSovereignty()">
+                    Calculate Sovereignty Score
+                </button>
+                
+                <div id="results" style="display: none;">
+                    <div class="results-panel">
+                        <div class="results-header">
+                            <div class="final-score" id="final-score">--</div>
+                            <div class="score-label">User Sovereignty Score</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill" style="width: 0%;">
+                                    <span id="progress-text"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="score-breakdown" id="score-breakdown">
+                            <!-- Breakdown will be inserted here -->
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Outer Ring Constraints (Cannot Be Changed)</h4>
+                            <p><strong>Ring 1 (Physical):</strong> 40% - Filecoin distributed storage providers globally. Limited by nation-state jurisdiction.</p>
+                            <p><strong>Ring 2 (Network):</strong> 50% - libp2p peer-to-peer overlay. Limited by ISP control and national firewalls.</p>
+                            <p><strong>Ring 3 (Protocol):</strong> 70% - Open IPFS/Filecoin protocols. Limited by Protocol Labs coordination.</p>
+                            <p style="margin-top: 15px; color: #ffaa00;"><strong>Your final score is MIN(outer rings, your choices)</strong></p>
+                        </div>
+                        
+                        <div class="recommendations" id="recommendations">
+                            <!-- Recommendations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+        
+        // Choice selection
+        const selections = {
+            '4': null,
+            '5': null,
+            '5b': null,
+            '4b': null
+        };
+        
+        function selectChoice(element) {
+            const ring = element.getAttribute('data-ring');
+            const value = parseInt(element.getAttribute('data-value'));
+            
+            // Deselect others in same ring
+            document.querySelectorAll(`[data-ring="${ring}"]`).forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Select this one
+            element.classList.add('selected');
+            selections[ring] = value;
+        }
+        
+        // Calculate sovereignty
+        function calculateSovereignty() {
+            // Validate all selections
+            if (!selections['4'] || selections['5'] === null || !selections['5b'] || !selections['4b']) {
+                alert('Please make a selection for each category before calculating.');
+                return;
+            }
+            
+            // Outer rings (fixed)
+            const ring1 = 40; // Physical
+            const ring2 = 50; // Network
+            const ring3 = 70; // Protocol
+            
+            // Inner rings (user choices)
+            const ring4Platform = selections['4'];
+            const ring4Economic = selections['4b'];
+            const ring4 = Math.min(ring4Platform, ring4Economic);
+            
+            const ring5Crypto = selections['5'];
+            const ring5Retrieval = selections['5b'];
+            const ring5 = Math.min(ring5Crypto, ring5Retrieval);
+            
+            // Final score = MIN of all rings
+            const finalScore = Math.min(ring1, ring2, ring3, ring4, ring5);
+            
+            // Display results
+            document.getElementById('final-score').textContent = finalScore + '%';
+            document.getElementById('progress-fill').style.width = finalScore + '%';
+            document.getElementById('progress-text').textContent = finalScore + '%';
+            
+            // Breakdown
+            const breakdown = document.getElementById('score-breakdown');
+            breakdown.innerHTML = `
+                <div class="score-item">
+                    <div class="score-item-title">Ring 1: Physical</div>
+                    <div class="score-item-value">${ring1}%</div>
+                    <div style="font-size: 0.8rem; color: #8888aa; margin-top: 5px;">Filecoin Network (Fixed)</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-title">Ring 2: Network</div>
+                    <div class="score-item-value">${ring2}%</div>
+                    <div style="font-size: 0.8rem; color: #8888aa; margin-top: 5px;">libp2p/IPFS (Fixed)</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-title">Ring 3: Protocol</div>
+                    <div class="score-item-value">${ring3}%</div>
+                    <div style="font-size: 0.8rem; color: #8888aa; margin-top: 5px;">IPFS/Filecoin (Fixed)</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-title">Ring 4: Platform</div>
+                    <div class="score-item-value">${ring4}%</div>
+                    <div style="font-size: 0.8rem; color: #00ffff; margin-top: 5px;">Your Choice</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-title">Ring 5: Crypto/Retrieval</div>
+                    <div class="score-item-value">${ring5}%</div>
+                    <div style="font-size: 0.8rem; color: #00ffff; margin-top: 5px;">Your Choice</div>
+                </div>
+            `;
+            
+            // Recommendations
+            const recommendations = generateRecommendations(finalScore, ring4, ring5, selections);
+            document.getElementById('recommendations').innerHTML = recommendations;
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function generateRecommendations(finalScore, ring4, ring5, selections) {
+            let html = '<h4>💡 Recommendations to Improve Sovereignty</h4>';
+            const recommendations = [];
+            
+            // Platform recommendations
+            if (selections['4'] < 70) {
+                recommendations.push({
+                    text: 'Upgrade to UCAN identity model (Storacha) instead of API keys',
+                    impact: `+${70 - selections['4']}% potential gain`,
+                    priority: 'HIGH'
+                });
+            }
+            
+            if (selections['4'] < 85) {
+                recommendations.push({
+                    text: 'Add on-chain registry where users record their CIDs in their own smart contracts',
+                    impact: `+${85 - selections['4']}% potential gain`,
+                    priority: 'MEDIUM'
+                });
+            }
+            
+            // Encryption recommendations
+            if (selections['5'] < 80) {
+                recommendations.push({
+                    text: 'Implement client-side encryption using WebCrypto API',
+                    impact: `+${80 - selections['5']}% potential gain`,
+                    priority: 'HIGH'
+                });
+            }
+            
+            if (selections['5'] < 90) {
+                recommendations.push({
+                    text: 'Store encryption keys in user\'s hardware wallet (MetaMask, Ledger)',
+                    impact: `+${90 - selections['5']}% potential gain`,
+                    priority: 'MEDIUM'
+                });
+            }
+            
+            // Retrieval recommendations
+            if (selections['5b'] < 60) {
+                recommendations.push({
+                    text: 'Provide fallback to multiple public IPFS gateways',
+                    impact: `+${60 - selections['5b']}% potential gain`,
+                    priority: 'HIGH'
+                });
+            }
+            
+            if (selections['5b'] < 80) {
+                recommendations.push({
+                    text: 'Add documentation teaching users how to run their own IPFS node',
+                    impact: 'Enables advanced users to be fully independent',
+                    priority: 'LOW'
+                });
+            }
+            
+            // Economic recommendations
+            if (selections['4b'] < 70) {
+                recommendations.push({
+                    text: 'Allow users to pay storage providers directly instead of through you',
+                    impact: `+${70 - selections['4b']}% potential gain`,
+                    priority: 'MEDIUM'
+                });
+            }
+            
+            if (recommendations.length === 0) {
+                html += '<p style="color: #00ffff;">✅ Excellent! You\'re using best practices for maximum feasible user sovereignty.</p>';
+                html += '<div class="recommendation-item">';
+                html += '<strong>Only constraint:</strong> Outer rings (Physical, Network, Protocol) limit final score to 40-70% regardless of your choices.';
+                html += '<div style="margin-top: 10px; color: #8888aa;">This is the reality of current decentralized infrastructure. No individual can achieve 100% sovereignty.</div>';
+                html += '</div>';
+            } else {
+                recommendations.forEach(rec => {
+                    html += '<div class="recommendation-item">';
+                    html += `<strong>[${rec.priority} PRIORITY]</strong> ${rec.text}`;
+                    html += `<div class="recommendation-impact">Impact: ${rec.impact}</div>`;
+                    html += '</div>';
+                });
+            }
+            
+            // Reality check
+            html += '<div class="recommendation-item" style="margin-top: 20px; border-left-color: #ff6b6b;">';
+            html += '<strong>🎯 The Hard Truth:</strong><br>';
+            html += `Even with perfect implementation (85-95%), your final user sovereignty is limited to <strong>${Math.min(40, ring4, ring5)}%</strong> because of outer ring constraints.`;
+            html += '<div style="margin-top: 10px;">Outer rings (Physical infrastructure, Network routing, Protocol governance) create a ceiling that individual DApps cannot overcome.</div>';
+            html += '</div>';
+            
+            return html;
+        }
+        
+        // Diagram code
+        const SOVEREIGNTY_DATA = {
+            ring1: {
+                name: "PHYSICAL SOVEREIGNTY",
+                radius: 450,
+                color: "rgba(255, 107, 107, 0.3)",
+                strokeColor: "#ff6b6b",
+                sovereignty: 40,
+                powerHolders: [
+                    {
+                        name: "Nation States",
+                        power: "Physical territory, law enforcement, military",
+                        constraint: "Can seize servers, arrest operators, force shutdowns",
+                        resistance: "Very High - Nearly impossible for individuals"
+                    },
+                    {
+                        name: "Data Center Operators",
+                        power: "Physical access to hardware, power supply",
+                        constraint: "Can unplug servers, deny service, inspect hardware",
+                        resistance: "High - Requires distributed infrastructure"
+                    },
+                    {
+                        name: "Hardware Manufacturers",
+                        power: "Supply chain, backdoors, design flaws",
+                        constraint: "Can embed surveillance, create kill switches",
+                        resistance: "High - Requires hardware diversity"
+                    }
+                ],
+                currentPower: "20 countries control most infrastructure • Top 10 data center companies = 70% capacity",
+                decentralization: "Filecoin: ~3,000+ storage providers globally • Bitcoin: ~15,000 nodes",
+                implication: "If a nation state can physically seize servers, all other sovereignty becomes irrelevant"
+            },
+            ring2: {
+                name: "NETWORK SOVEREIGNTY",
+                radius: 360,
+                color: "rgba(255, 170, 0, 0.3)",
+                strokeColor: "#ffaa00",
+                sovereignty: 50,
+                powerHolders: [
+                    {
+                        name: "ICANN",
+                        power: "Root DNS, domain names, IP allocation",
+                        constraint: "Can revoke domains, control naming system",
+                        resistance: "Very High - Global monopoly"
+                    },
+                    {
+                        name: "Regional Internet Registries",
+                        power: "IP address allocation (ARIN, RIPE, APNIC, etc.)",
+                        constraint: "Control who gets IP blocks",
+                        resistance: "Very High - Required for routing"
+                    },
+                    {
+                        name: "Tier 1 ISPs",
+                        power: "BGP routing, backbone infrastructure",
+                        constraint: "Can blackhole routes, drop traffic",
+                        resistance: "Very High - Control internet paths"
+                    },
+                    {
+                        name: "National ISPs",
+                        power: "Last-mile connectivity, DNS resolvers",
+                        constraint: "Can block sites, inspect traffic, throttle",
+                        resistance: "High - Can be bypassed with VPN/Tor"
+                    }
+                ],
+                currentPower: "ICANN: Single organization controls DNS root • 5 RIRs control all IP allocation • ~15 Tier 1 ISPs control global backbone",
+                decentralization: "libp2p: Overlay network • Tor: Onion routing • ENS: Decentralized naming",
+                implication: "If ISP blocks IPFS ports or country operates firewall, protocol-level sovereignty is constrained"
+            },
+            ring3: {
+                name: "PROTOCOL SOVEREIGNTY",
+                radius: 270,
+                color: "rgba(255, 255, 0, 0.3)",
+                strokeColor: "#ffff00",
+                sovereignty: 70,
+                powerHolders: [
+                    {
+                        name: "Protocol Labs",
+                        power: "IPFS/Filecoin development, reference implementations",
+                        constraint: "Can push protocol changes, coordinate upgrades",
+                        resistance: "Medium - Open source, can be forked"
+                    },
+                    {
+                        name: "Filecoin Foundation",
+                        power: "Network governance, grants, ecosystem direction",
+                        constraint: "Can influence protocol development",
+                        resistance: "Medium - Community can resist"
+                    },
+                    {
+                        name: "Storage Provider Cartels",
+                        power: "Can refuse protocol upgrades, coordinate behavior",
+                        constraint: "Can fragment network, refuse to serve",
+                        resistance: "Medium - Market competition helps"
+                    }
+                ],
+                currentPower: "Protocol Labs: Core development • Filecoin Foundation: Network governance • Large SPs: Economic influence",
+                decentralization: "Open-source code (auditable) • FIP process (community proposals) • Multiple implementations • Cryptographic proofs",
+                implication: "If protocol adds censorship or KYC, platform-level sovereignty is constrained"
+            },
+            ring4: {
+                name: "PLATFORM SOVEREIGNTY",
+                radius: 180,
+                color: "rgba(0, 255, 170, 0.3)",
+                strokeColor: "#00ffaa",
+                sovereignty: 85,
+                powerHolders: [
+                    {
+                        name: "Lighthouse",
+                        power: "API keys, gateway infrastructure, deal aggregation",
+                        constraint: "Can shut down service, change pricing, alter features",
+                        resistance: "Medium-High - Service dependency"
+                    },
+                    {
+                        name: "Storacha (web3.storage)",
+                        power: "Hosting infrastructure, UCAN services, gateway",
+                        constraint: "Can terminate service, change ToS, alter features",
+                        resistance: "Medium - Better than API key model"
+                    },
+                    {
+                        name: "Public IPFS Gateways",
+                        power: "HTTP access to IPFS network",
+                        constraint: "Can go offline, block content, rate limit",
+                        resistance: "Medium - Multiple alternatives exist"
+                    },
+                    {
+                        name: "Your DApp",
+                        power: "User interface, convenience features, documentation",
+                        constraint: "Can shut down, change features, require updates",
+                        resistance: "Low - User can bypass if Layer 5 is strong"
+                    }
+                ],
+                currentPower: "Lighthouse: Centralized API key model • Storacha: Better (UCAN) but still a service",
+                decentralization: "UCAN: User-owned identity • Multiple gateway options • Direct smart contract access possible",
+                implication: "If platform shuts down with API key model, user loses identity—even if data exists on IPFS/Filecoin"
+            },
+            ring5: {
+                name: "CRYPTOGRAPHIC SOVEREIGNTY",
+                radius: 90,
+                color: "rgba(0, 255, 255, 0.3)",
+                strokeColor: "#00ffff",
+                sovereignty: 90,
+                powerHolders: [
+                    {
+                        name: "Key Management Services",
+                        power: "Store/manage private keys",
+                        constraint: "Can lose keys, get hacked, refuse access",
+                        resistance: "High - Single point of failure"
+                    },
+                    {
+                        name: "Wallet Providers",
+                        power: "Sign transactions, encrypt/decrypt",
+                        constraint: "Can block operations, leak keys",
+                        resistance: "Medium - Can use hardware wallets"
+                    },
+                    {
+                        name: "Browser Vendors",
+                        power: "WebCrypto API, sandboxing",
+                        constraint: "Can disable crypto, introduce vulnerabilities",
+                        resistance: "Medium - Can verify, use native apps"
+                    },
+                    {
+                        name: "Encryption Service Providers",
+                        power: "Kavach (Lighthouse), Lit Protocol",
+                        constraint: "Can refuse to decrypt, lose keys, shut down",
+                        resistance: "High - If you depend on them"
+                    }
+                ],
+                currentPower: "Most users rely on MetaMask, browser crypto • Many use custodial wallets",
+                decentralization: "WebCrypto API (browser-based) • Hardware wallets • Open-source crypto libraries • Client-side encryption",
+                implication: "If you don't control encryption keys, you don't control access—regardless of how decentralized storage is"
+            },
+            center: {
+                name: "USER AGENCY",
+                radius: 50,
+                color: "rgba(0, 170, 255, 0.7)",
+                strokeColor: "#00aaff",
+                sovereignty: 40,
+                capabilities: [
+                    "Store data permanently",
+                    "Retrieve data without permission",
+                    "Control who accesses data",
+                    "Move to different application",
+                    "Prove ownership cryptographically",
+                    "Resist censorship attempts",
+                    "Survive platform shutdowns",
+                    "Operate pseudonymously/anonymously"
+                ],
+                calculation: "User Agency = MIN(40%, 50%, 70%, 85%, 90%) = 40%",
+                principle: "Sovereignty is only as strong as the weakest outer ring"
+            }
+        };
+        
+        // Draw the diagram
+        const svg = document.getElementById('sovereignty-diagram');
+        const centerX = 500;
+        const centerY = 500;
+        
+        // Draw rings
+        Object.keys(SOVEREIGNTY_DATA).forEach((key, index) => {
+            if (key === 'center') return;
+            
+            const ring = SOVEREIGNTY_DATA[key];
+            
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', centerX);
+            circle.setAttribute('cy', centerY);
+            circle.setAttribute('r', ring.radius);
+            circle.setAttribute('fill', ring.color);
+            circle.setAttribute('stroke', ring.strokeColor);
+            circle.setAttribute('stroke-width', '3');
+            circle.setAttribute('class', 'ring');
+            circle.setAttribute('data-ring', key);
+            
+            svg.appendChild(circle);
+            
+            const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            label.setAttribute('x', centerX);
+            label.setAttribute('y', centerY - ring.radius - 10);
+            label.setAttribute('class', 'ring-label');
+            label.textContent = ring.name;
+            svg.appendChild(label);
+            
+            const score = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            score.setAttribute('x', centerX);
+            score.setAttribute('y', centerY - ring.radius + 15);
+            score.setAttribute('class', 'sovereignty-score');
+            score.textContent = `${ring.sovereignty}% Sovereignty`;
+            svg.appendChild(score);
+            
+            circle.addEventListener('click', () => showRingInfo(key));
+        });
+        
+        // Draw center
+        const centerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        centerCircle.setAttribute('cx', centerX);
+        centerCircle.setAttribute('cy', centerY);
+        centerCircle.setAttribute('r', SOVEREIGNTY_DATA.center.radius);
+        centerCircle.setAttribute('fill', SOVEREIGNTY_DATA.center.color);
+        centerCircle.setAttribute('stroke', SOVEREIGNTY_DATA.center.strokeColor);
+        centerCircle.setAttribute('stroke-width', '3');
+        centerCircle.setAttribute('class', 'ring');
+        svg.appendChild(centerCircle);
+        
+        const centerLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        centerLabel.setAttribute('x', centerX);
+        centerLabel.setAttribute('y', centerY - 5);
+        centerLabel.setAttribute('class', 'ring-label');
+        centerLabel.textContent = 'USER';
+        svg.appendChild(centerLabel);
+        
+        const centerLabel2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        centerLabel2.setAttribute('x', centerX);
+        centerLabel2.setAttribute('y', centerY + 15);
+        centerLabel2.setAttribute('class', 'ring-label');
+        centerLabel2.textContent = 'AGENCY';
+        svg.appendChild(centerLabel2);
+        
+        const centerScore = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        centerScore.setAttribute('x', centerX);
+        centerScore.setAttribute('y', centerY + 35);
+        centerScore.setAttribute('class', 'sovereignty-score');
+        centerScore.setAttribute('font-size', '14');
+        centerScore.textContent = `${SOVEREIGNTY_DATA.center.sovereignty}%`;
+        svg.appendChild(centerScore);
+        
+        centerCircle.addEventListener('click', () => showRingInfo('center'));
+        
+        function showRingInfo(ringKey) {
+            const panel = document.getElementById('info-panel');
+            const ring = SOVEREIGNTY_DATA[ringKey];
+            
+            if (ringKey === 'center') {
+                panel.innerHTML = `
+                    <h2>${ring.name}</h2>
+                    <p><strong>Final Sovereignty Score:</strong> ${ring.sovereignty}%</p>
+                    <p><strong>Calculation:</strong> ${ring.calculation}</p>
+                    <p><strong>Principle:</strong> ${ring.principle}</p>
+                    
+                    <h3>What Users Can Actually Do:</h3>
+                    <ul>
+                        ${ring.capabilities.map(cap => `<li>✅ ${cap}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                panel.innerHTML = `
+                    <h2>${ring.name}</h2>
+                    <p><strong>Sovereignty at This Layer:</strong> ${ring.sovereignty}%</p>
+                    
+                    <h3>Power Holders & Constraints:</h3>
+                    ${ring.powerHolders.map(holder => `
+                        <div class="power-holder">
+                            <h4>${holder.name}</h4>
+                            <p><strong>Power:</strong> ${holder.power}</p>
+                            <p class="constraint"><strong>Constraint:</strong> ${holder.constraint}</p>
+                            <p><strong>Resistance Level:</strong> ${holder.resistance}</p>
+                        </div>
+                    `).join('')}
+                    
+                    <h3>Current State of Power:</h3>
+                    <p>${ring.currentPower}</p>
+                    
+                    <h3>Decentralization Attempts:</h3>
+                    <p>${ring.decentralization}</p>
+                    
+                    <h3>Implication for Inner Rings:</h3>
+                    <p class="constraint">"${ring.implication}"</p>
+                `;
+            }
+            
+            panel.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
