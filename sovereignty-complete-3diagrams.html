@@ -3433,18 +3433,18 @@ function renderBlockchainTriangle(svgId, arch) {
         svg.appendChild(gridLine);
     });
     
-    // Labels
+    // Labels - centered at vertices
     const labels = [
-        { text: 'Decentralization', x: vertices.decentralization.x - 35, y: vertices.decentralization.y + 20, fill: '#00ffff' },
-        { text: 'Security', x: vertices.security.x + 35, y: vertices.security.y + 20, fill: '#00ffaa' },
-        { text: 'Scalability', x: vertices.scalability.x, y: vertices.scalability.y - 30, fill: '#ff00ff' }
+        { text: 'Decentralization', x: vertices.decentralization.x, y: vertices.decentralization.y + 20, fill: '#00ffff', anchor: 'middle' },
+        { text: 'Security', x: vertices.security.x, y: vertices.security.y + 20, fill: '#00ffaa', anchor: 'middle' },
+        { text: 'Scalability', x: vertices.scalability.x, y: vertices.scalability.y - 30, fill: '#ff00ff', anchor: 'middle' }
     ];
     
     labels.forEach(label => {
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', label.x);
         text.setAttribute('y', label.y);
-        text.setAttribute('text-anchor', label.text === 'Scalability' ? 'middle' : (label.text === 'Security' ? 'start' : 'end'));
+        text.setAttribute('text-anchor', label.anchor);
         text.setAttribute('fill', label.fill);
         text.setAttribute('font-weight', '700');
         text.setAttribute('font-size', '14');
