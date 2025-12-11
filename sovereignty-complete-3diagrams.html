@@ -761,6 +761,9 @@
             <button class="tab-button" onclick="switchTab('trilemma')">
                 ⚖️ Storage Trilemma
             </button>
+            <button class="tab-button" onclick="switchTab('blockchain-trilemma')">
+                ⛓️ Blockchain Trilemma
+            </button>
         </div>
         
         <!-- USER SOVEREIGNTY TAB -->
@@ -1401,10 +1404,10 @@
                         <div style="margin-top: 25px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; border: 1px solid rgba(0, 255, 255, 0.3);">
                             <h4 style="color: #00ffff; margin-top: 0; font-size: 0.9rem; margin-bottom: 10px;">Trilemma Constraint Analysis</h4>
                             <div style="font-size: 0.85rem; color: #e0e0ff;">
-                                Total Score: <span id="total-score" style="color: #00ffff; font-weight: 700;">190</span> / 200 theoretical max
+                                Total Score: <span id="total-score" style="color: #00ffff; font-weight: 700;">190</span> / 300 theoretical max
                             </div>
                             <div style="font-size: 0.75rem; color: #8888aa; margin-top: 8px;">
-                                ⚠️ Scores totaling &gt;200 would violate the trilemma constraint
+                                ⚠️ The trilemma constraint: you cannot maximize all three dimensions simultaneously. Optimizing for two means the third must be lower.
                             </div>
                         </div>
                     </div>
@@ -1453,10 +1456,10 @@
                             
                             <div id="custom-total" class="total-score valid" style="margin-top: 20px;">
                                 <div style="color: #e0e0ff;">
-                                    Total: <span id="custom-total-value" style="font-weight: 700; color: #00ffaa;">150</span> / 200
+                                    Total: <span id="custom-total-value" style="font-weight: 700; color: #00ffaa;">150</span> / 300
                                 </div>
                                 <div id="custom-warning" style="font-size: 0.75rem; color: #ff6b6b; margin-top: 8px; display: none;">
-                                    ⚠️ This violates the trilemma constraint - impossible to achieve in practice
+                                    ⚠️ This violates the trilemma constraint - you cannot maximize all three dimensions simultaneously
                                 </div>
                             </div>
                         </div>
@@ -1491,6 +1494,334 @@
                 </div>
             </div>
         </div>
+        
+        <!-- BLOCKCHAIN TRILEMMA TAB -->
+        <div id="blockchain-trilemma-tab" class="tab-content">
+            <div class="trilemma-container">
+                <div class="trilemma-header">
+                    <h2>The Blockchain Trilemma</h2>
+                    <p style="text-align: center; color: #8888aa; margin-top: 10px; font-size: 0.95rem;">
+                        Decentralization • Security • Scalability — Choose Two
+                    </p>
+                </div>
+                
+                <div style="max-width: 1000px; margin: 0 auto 40px;">
+                    <div style="background: rgba(0, 255, 255, 0.1); border-left: 4px solid #00ffff; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                        <h4 style="color: #00ffff; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">The Three Dimensions</h4>
+                        
+                        <div>
+                            <p style="margin-bottom: 10px;">
+                                <strong style="color: #00ffff;">1. Decentralization</strong> — How many independent nodes validate transactions? Is participation permissionless? Can anyone run a node? Maximum decentralization means thousands of independent validators, no single point of control, and censorship resistance.
+                            </p>
+                            <p style="font-size: 0.9rem; color: #8888aa; margin-left: 20px;">
+                                Think: Bitcoin's 15,000+ nodes vs. a private blockchain with 5 known validators.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <p style="margin-bottom: 10px;">
+                                <strong style="color: #00ffaa;">2. Security</strong> — How resistant is the network to attacks? What's the cost to attack? Are there cryptographic proofs? Maximum security means strong immutability guarantees, high economic security, and resistance to 51% attacks.
+                            </p>
+                            <p style="font-size: 0.9rem; color: #8888aa; margin-left: 20px;">
+                                Think: Bitcoin's proof-of-work requiring billions in hardware vs. a network secured by a small validator set.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <p style="margin-bottom: 10px;">
+                                <strong style="color: #ff00ff;">3. Scalability</strong> — How many transactions per second? What are the fees? How fast is finality? Maximum scalability means high throughput, low latency, and low transaction costs.
+                            </p>
+                            <p style="font-size: 0.9rem; color: #8888aa; margin-left: 20px;">
+                                Think: Solana's 65,000 TPS vs. Bitcoin's 7 TPS with high fees during congestion.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 170, 0, 0.1); border-left: 4px solid #ffaa00; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                        <h4 style="color: #ffaa00; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">Why You Can't Have It All</h4>
+                        
+                        <p style="margin-bottom: 15px;">
+                            Here's the fundamental constraint: <strong>These three dimensions are in tension with each other.</strong>
+                        </p>
+                        
+                        <p style="margin-bottom: 15px;">
+                            Want <strong style="color: #00ffff;">maximum decentralization</strong>? You need many independent nodes, permissionless participation, and distributed consensus. That means slower finality, higher coordination overhead, and network-wide validation. <strong style="color: #ff00ff;">Scalability suffers.</strong>
+                        </p>
+                        
+                        <p style="margin-bottom: 15px;">
+                            Want <strong style="color: #00ffaa;">maximum security</strong>? You need cryptographic proofs, economic security, and strong immutability guarantees. That means expensive operations, high redundancy, and conservative protocols. <strong style="color: #ff00ff;">Scalability suffers.</strong>
+                        </p>
+                        
+                        <p style="margin-bottom: 15px;">
+                            Want <strong style="color: #ff00ff;">maximum scalability</strong>? You need high throughput, low latency, and efficient resource usage. That means fewer validators, more centralization, or off-chain solutions that reduce on-chain guarantees. <strong style="color: #00ffff;">Decentralization or security suffers.</strong>
+                        </p>
+                        
+                        <p style="font-size: 1.05rem; color: #ffaa00; font-weight: 700; margin-top: 20px;">
+                            The trilemma forces you to choose: Which two matter most? What are you willing to sacrifice?
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                        <h4 style="color: #00ffaa; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">Real-World Examples</h4>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong style="color: #00ffff;">Bitcoin (Decentralization + Security, Sacrifice Scalability)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Highly decentralized with thousands of nodes. Extremely secure through proof-of-work. But limited to ~7 transactions per second, high fees during congestion, and slow confirmation times. Scalability: 10%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Ethereum L1 (Decentralization + Security, Sacrifice Scalability)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Decentralized validator set, strong security guarantees. But limited throughput (~15 TPS), high gas costs, and network congestion. Scalability: 25%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Solana (Scalability + Security, Sacrifice Decentralization)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                High throughput (thousands of TPS), low fees, fast finality. Strong cryptographic security. But requires powerful hardware, fewer validators, and concerns about centralization of node operators. Decentralization: 40%, Security: 80%, Scalability: 90%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Polygon/Arbitrum (Scalability + Decentralization, Sacrifice Security)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                High throughput through layer 2 solutions, more decentralized than high-performance L1s. But security depends on the underlying L1 or additional trust assumptions. Security: 60-70%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Private/Permissioned Blockchains (Scalability + Security, Sacrifice Decentralization)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                High throughput, low fees, fast finality. Strong security through known validators. But only a few trusted nodes, permissioned participation, and centralized control. Decentralization: 10%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Hive (Decentralization + Security, Sacrifice Scalability)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Decentralized social blockchain with good node distribution and censorship resistance. Strong security through delegated proof-of-stake. Moderate transaction throughput suitable for social media use cases. Scalability: 50%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>PI Network (Scalability + Decentralization, Sacrifice Security)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Mobile-first design prioritizing accessibility and user adoption. Good decentralization through mobile mining. Still in development phase, security not yet fully battle-tested. Security: 65%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Algorand (Decentralization + Security, Moderate Scalability)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Pure Proof-of-Stake with fast finality and strong security guarantees. Good decentralization through random selection of validators. Better scalability than Bitcoin/Ethereum but still prioritizes decentralization and security over maximum throughput. Decentralization: 80%, Security: 85%, Scalability: 50%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>XDC Network (Scalability + Security, Sacrifice Decentralization)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Enterprise-focused blockchain with high transaction throughput and strong security. Hybrid public/private model optimized for business use cases. More centralized validator set compared to public blockchains. Decentralization: 50%, Security: 80%, Scalability: 85%.
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Tezos (Decentralization + Security, Sacrifice Scalability)</strong>
+                            </p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Self-amending blockchain with on-chain governance. Strong decentralization through liquid proof-of-stake. High security through formal verification and upgradeability. Limited throughput similar to Ethereum L1. Decentralization: 85%, Security: 80%, Scalability: 40%.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 107, 107, 0.1); border-left: 4px solid #ff6b6b; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                        <h4 style="color: #ff6b6b; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">The Honesty Principle</h4>
+                        
+                        <p style="margin-bottom: 15px;">
+                            Many blockchain projects claim to "solve the trilemma" through innovative consensus mechanisms, sharding, or layer 2 solutions. But these claims often hide tradeoffs behind technical complexity.
+                        </p>
+                        
+                        <p style="margin-bottom: 15px;">
+                            The trilemma framework forces honesty: <strong>If you want true decentralization, you must accept scalability limits.</strong> If you want high throughput, you must accept centralization or reduced security guarantees. If you want maximum security, you must accept slower, more expensive transactions.
+                        </p>
+                        
+                        <p style="font-size: 1.05rem; color: #00ffff; font-weight: 700; margin-top: 20px;">
+                            Bitcoin doesn't compromise—it makes the philosophically honest choice: maximize decentralization and security by explicitly accepting scalability limitations.
+                        </p>
+                        
+                        <p style="font-size: 0.95rem; color: #8888aa; margin-top: 15px; font-style: italic;">
+                            This is not a bug—it's the honest architecture. Users who want censorship resistance and immutability must accept that the network prioritizes these properties over transaction speed and cost. In exchange, they get actual decentralization—not the illusion of it.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="trilemma-grid">
+                    <!-- Triangle Visualization -->
+                    <div class="trilemma-card">
+                        <h3 id="blockchain-selected-arch-name">Bitcoin</h3>
+                        <div class="triangle-chart">
+                            <svg id="blockchain-triangle-svg" class="triangle-svg" viewBox="-60 -60 520 520"></svg>
+                        </div>
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 8px;">
+                            <p id="blockchain-selected-arch-description" style="font-size: 0.9rem; color: #8888aa; margin: 0;">
+                                Maximum decentralization and security, limited scalability
+                            </p>
+                            <div style="margin-top: 10px; font-size: 0.85rem; color: #00ffff;">
+                                Position: <span id="blockchain-trilemma-position">Decentralization + Security</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dimension Scores -->
+                    <div class="trilemma-card">
+                        <h3>Dimension Scores</h3>
+                        <div class="dimension-bar">
+                            <div class="dimension-label">
+                                <span style="color: #00ffff;">Decentralization</span>
+                                <span id="blockchain-dec-score">95%</span>
+                            </div>
+                            <div class="dimension-bar-bg">
+                                <div id="blockchain-dec-bar" class="dimension-bar-fill sovereignty" style="width: 95%;"></div>
+                            </div>
+                            <div class="dimension-description">Independent nodes, censorship resistance</div>
+                        </div>
+                        
+                        <div class="dimension-bar">
+                            <div class="dimension-label">
+                                <span style="color: #00ffaa;">Security</span>
+                                <span id="blockchain-sec-score">95%</span>
+                            </div>
+                            <div class="dimension-bar-bg">
+                                <div id="blockchain-sec-bar" class="dimension-bar-fill persistence" style="width: 95%;"></div>
+                            </div>
+                            <div class="dimension-description">Economic security, immutability</div>
+                        </div>
+                        
+                        <div class="dimension-bar">
+                            <div class="dimension-label">
+                                <span style="color: #ff00ff;">Scalability</span>
+                                <span id="blockchain-sca-score">20%</span>
+                            </div>
+                            <div class="dimension-bar-bg">
+                                <div id="blockchain-sca-bar" class="dimension-bar-fill practicality" style="width: 20%;"></div>
+                            </div>
+                            <div class="dimension-description">Throughput, latency, cost</div>
+                        </div>
+                        
+                        <div style="margin-top: 25px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <h4 style="color: #00ffff; margin-top: 0; font-size: 0.9rem; margin-bottom: 10px;">Trilemma Constraint Analysis</h4>
+                            <div style="font-size: 0.85rem; color: #e0e0ff;">
+                                Total Score: <span id="blockchain-total-score" style="color: #00ffff; font-weight: 700;">200</span> / 300 theoretical max
+                            </div>
+                            <div style="font-size: 0.75rem; color: #8888aa; margin-top: 8px;">
+                                ⚠️ The trilemma constraint: you cannot maximize all three dimensions simultaneously. Optimizing for two means the third must be lower.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Architecture Selector -->
+                <div class="trilemma-card" style="margin-bottom: 30px;">
+                    <h3>Compare Blockchain Architectures</h3>
+                    <div id="blockchain-architecture-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <!-- Architectures will be inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Custom Builder -->
+                <div class="custom-builder">
+                    <h3>Build Custom Blockchain Architecture</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
+                        <div>
+                            <div class="slider-group">
+                                <div class="slider-label">
+                                    <span style="color: #00ffff;">Decentralization</span>
+                                    <span id="blockchain-custom-dec">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" id="blockchain-dec-slider" class="slider" oninput="updateBlockchainCustomArch()">
+                            </div>
+                            
+                            <div class="slider-group">
+                                <div class="slider-label">
+                                    <span style="color: #00ffaa;">Security</span>
+                                    <span id="blockchain-custom-sec">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" id="blockchain-sec-slider" class="slider" oninput="updateBlockchainCustomArch()">
+                            </div>
+                            
+                            <div class="slider-group">
+                                <div class="slider-label">
+                                    <span style="color: #ff00ff;">Scalability</span>
+                                    <span id="blockchain-custom-sca">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" id="blockchain-sca-slider" class="slider" oninput="updateBlockchainCustomArch()">
+                            </div>
+                            
+                            <button onclick="visualizeBlockchainCustom()" style="width: 100%; background: linear-gradient(135deg, #00ffff, #00aaff); border: none; color: #0a0a0f; padding: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 15px; transition: all 0.3s;">
+                                Visualize Custom Architecture
+                            </button>
+                            
+                            <div id="blockchain-custom-total" class="total-score valid" style="margin-top: 20px;">
+                                <div style="color: #e0e0ff;">
+                                    Total: <span id="blockchain-custom-total-value" style="font-weight: 700; color: #00ffaa;">150</span> / 300
+                                </div>
+                                <div id="blockchain-custom-warning" style="font-size: 0.75rem; color: #ff6b6b; margin-top: 8px; display: none;">
+                                    ⚠️ This violates the trilemma constraint - you cannot maximize all three dimensions simultaneously
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="triangle-chart">
+                                <svg id="blockchain-custom-triangle-svg" class="triangle-svg" viewBox="-60 -60 520 520"></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Insights -->
+                <div class="insights-box">
+                    <h3>Key Insights</h3>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #00ffff;">→</span>
+                        <p><strong>No perfect solution exists.</strong> Every blockchain makes explicit tradeoffs between decentralization, security, and scalability.</p>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #00ffaa;">→</span>
+                        <p><strong>Bitcoin</strong> (95% decentralization, 95% security, 20% scalability) represents an honest choice: maximize censorship resistance and immutability by accepting scalability limitations.</p>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #ff00ff;">→</span>
+                        <p><strong>High-performance chains</strong> sacrifice decentralization for throughput—but so do layer 2 solutions that depend on centralized sequencers.</p>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #ffaa00;">→</span>
+                        <p><strong>True decentralization requires accepting limits.</strong> If you want censorship resistance, you must accept slower, more expensive transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -1503,6 +1834,9 @@
             // Initialize trilemma when tab is shown
             if (tabName === 'trilemma') {
                 setTimeout(initTrilemma, 100);
+            }
+            if (tabName === 'blockchain-trilemma') {
+                setTimeout(initBlockchainTrilemma, 100);
             }
         }
         
@@ -2868,7 +3202,13 @@ function updateCustomTotal() {
     const totalDiv = document.getElementById('custom-total');
     const warning = document.getElementById('custom-warning');
     
-    if (total > 200) {
+    // Trilemma constraint: cannot maximize all three dimensions simultaneously
+    // Warn if total > 250 (trying to maximize all three) OR all three are high (> 60)
+    const allHigh = customArchitecture.sovereignty > 60 && 
+                    customArchitecture.persistence > 60 && 
+                    customArchitecture.practicality > 60;
+    
+    if (total > 250 || allHigh) {
         totalDiv.className = 'total-score invalid';
         warning.style.display = 'block';
         document.getElementById('custom-total-value').style.color = '#ff6b6b';
@@ -2892,6 +3232,339 @@ function visualizeCustom() {
     document.getElementById('selected-arch-name').textContent = selectedArchitecture.name;
     document.getElementById('selected-arch-description').textContent = selectedArchitecture.description;
     document.getElementById('trilemma-position').textContent = getTrilemmaPosition(selectedArchitecture);
+}
+
+// Blockchain Trilemma
+const BLOCKCHAIN_TRILEMMA_ARCHITECTURES = [
+    {
+        name: 'Bitcoin',
+        decentralization: 95,
+        security: 95,
+        scalability: 10,
+        color: '#f7931a',
+        description: 'Maximum decentralization and security, limited scalability'
+    },
+    {
+        name: 'Ethereum L1',
+        decentralization: 90,
+        security: 90,
+        scalability: 25,
+        color: '#627eea',
+        description: 'Decentralized validator set, strong security, limited throughput'
+    },
+    {
+        name: 'Solana',
+        decentralization: 40,
+        security: 80,
+        scalability: 90,
+        color: '#14f195',
+        description: 'High throughput, strong security, fewer validators'
+    },
+    {
+        name: 'Polygon/Arbitrum',
+        decentralization: 70,
+        security: 60,
+        scalability: 85,
+        color: '#8247e5',
+        description: 'Layer 2 solution: high throughput, depends on L1 security'
+    },
+    {
+        name: 'Private Blockchain',
+        decentralization: 10,
+        security: 90,
+        scalability: 95,
+        color: '#ef4444',
+        description: 'Permissioned network: high performance, centralized control'
+    },
+    {
+        name: 'Cardano',
+        decentralization: 85,
+        security: 75,
+        scalability: 45,
+        color: '#0033ad',
+        description: 'Research-driven, balanced approach with gradual scaling'
+    },
+    {
+        name: 'Avalanche',
+        decentralization: 65,
+        security: 75,
+        scalability: 80,
+        color: '#e84142',
+        description: 'Subnet architecture: good balance, some centralization tradeoffs'
+    },
+    {
+        name: 'Hive',
+        decentralization: 75,
+        security: 70,
+        scalability: 50,
+        color: '#00d4aa',
+        description: 'Decentralized social blockchain: good decentralization, moderate scalability'
+    },
+    {
+        name: 'PI Network',
+        decentralization: 55,
+        security: 60,
+        scalability: 70,
+        color: '#00b4d8',
+        description: 'Mobile-first blockchain: accessible design, still in development'
+    },
+    {
+        name: 'Algorand',
+        decentralization: 80,
+        security: 85,
+        scalability: 50,
+        color: '#000000',
+        description: 'Pure Proof-of-Stake: fast finality, strong security, good decentralization'
+    },
+    {
+        name: 'XDC Network',
+        decentralization: 50,
+        security: 80,
+        scalability: 85,
+        color: '#ff6b00',
+        description: 'Enterprise-focused: high performance, hybrid public/private model'
+    },
+    {
+        name: 'Tezos',
+        decentralization: 85,
+        security: 80,
+        scalability: 40,
+        color: '#2c7df7',
+        description: 'Self-amending blockchain: on-chain governance, strong decentralization'
+    }
+];
+
+let selectedBlockchainArchitecture = BLOCKCHAIN_TRILEMMA_ARCHITECTURES[0]; // Bitcoin default
+let customBlockchainArchitecture = { decentralization: 50, security: 50, scalability: 50 };
+
+function initBlockchainTrilemma() {
+    renderBlockchainArchitectureGrid();
+    renderBlockchainTriangle('blockchain-triangle-svg', selectedBlockchainArchitecture);
+    updateBlockchainScores(selectedBlockchainArchitecture);
+    renderBlockchainTriangle('blockchain-custom-triangle-svg', customBlockchainArchitecture);
+    updateBlockchainCustomTotal();
+}
+
+function renderBlockchainArchitectureGrid() {
+    const grid = document.getElementById('blockchain-architecture-grid');
+    if (!grid) return;
+    
+    grid.innerHTML = BLOCKCHAIN_TRILEMMA_ARCHITECTURES.map(arch => `
+        <div class="architecture-card ${arch.name === selectedBlockchainArchitecture.name ? 'selected' : ''}" 
+             onclick="selectBlockchainArchitecture('${arch.name}')">
+            <div>
+                <span class="architecture-color" style="background-color: ${arch.color};"></span>
+                <span class="architecture-name">${arch.name}</span>
+            </div>
+            <div class="architecture-scores">
+                D: ${arch.decentralization}% | S: ${arch.security}% | Sc: ${arch.scalability}%
+            </div>
+        </div>
+    `).join('');
+}
+
+function selectBlockchainArchitecture(name) {
+    selectedBlockchainArchitecture = BLOCKCHAIN_TRILEMMA_ARCHITECTURES.find(a => a.name === name);
+    renderBlockchainArchitectureGrid();
+    renderBlockchainTriangle('blockchain-triangle-svg', selectedBlockchainArchitecture);
+    updateBlockchainScores(selectedBlockchainArchitecture);
+    document.getElementById('blockchain-selected-arch-name').textContent = selectedBlockchainArchitecture.name;
+    document.getElementById('blockchain-selected-arch-description').textContent = selectedBlockchainArchitecture.description;
+    document.getElementById('blockchain-trilemma-position').textContent = getBlockchainTrilemmaPosition(selectedBlockchainArchitecture);
+}
+
+function getBlockchainTrilemmaPosition(arch) {
+    const scores = [
+        { dim: 'Decentralization + Security', value: arch.decentralization + arch.security },
+        { dim: 'Security + Scalability', value: arch.security + arch.scalability },
+        { dim: 'Decentralization + Scalability', value: arch.decentralization + arch.scalability }
+    ];
+    return scores.sort((a, b) => b.value - a.value)[0].dim;
+}
+
+function renderBlockchainTriangle(svgId, arch) {
+    const svg = document.getElementById(svgId);
+    if (!svg) return;
+    
+    svg.innerHTML = '';
+    const size = 400;
+    const center = size / 2;
+    const radius = size / 2 - 60;
+    
+    // Triangle vertices - same layout as storage trilemma
+    const vertices = {
+        decentralization: { x: center - radius * 0.866, y: center + radius * 0.5 },
+        security: { x: center + radius * 0.866, y: center + radius * 0.5 },
+        scalability: { x: center, y: 60 }
+    };
+    
+    // Draw triangle
+    const triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    triangle.setAttribute('points', 
+        `${vertices.decentralization.x},${vertices.decentralization.y} ${vertices.security.x},${vertices.security.y} ${vertices.scalability.x},${vertices.scalability.y}`);
+    triangle.setAttribute('fill', 'none');
+    triangle.setAttribute('stroke', '#4b5563');
+    triangle.setAttribute('stroke-width', '2');
+    svg.appendChild(triangle);
+    
+    // Draw grid lines
+    [0.25, 0.5, 0.75].forEach(factor => {
+        const innerVertices = {
+            decentralization: { 
+                x: center + (vertices.decentralization.x - center) * factor,
+                y: center + (vertices.decentralization.y - center) * factor
+            },
+            security: { 
+                x: center + (vertices.security.x - center) * factor,
+                y: center + (vertices.security.y - center) * factor
+            },
+            scalability: { 
+                x: center + (vertices.scalability.x - center) * factor,
+                y: center + (vertices.scalability.y - center) * factor
+            }
+        };
+        const gridLine = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        gridLine.setAttribute('points',
+            `${innerVertices.decentralization.x},${innerVertices.decentralization.y} ${innerVertices.security.x},${innerVertices.security.y} ${innerVertices.scalability.x},${innerVertices.scalability.y}`);
+        gridLine.setAttribute('fill', 'none');
+        gridLine.setAttribute('stroke', '#374151');
+        gridLine.setAttribute('stroke-width', '1');
+        gridLine.setAttribute('opacity', '0.3');
+        svg.appendChild(gridLine);
+    });
+    
+    // Labels
+    const labels = [
+        { text: 'Decentralization', x: vertices.decentralization.x - 35, y: vertices.decentralization.y + 20, fill: '#00ffff' },
+        { text: 'Security', x: vertices.security.x + 35, y: vertices.security.y + 20, fill: '#00ffaa' },
+        { text: 'Scalability', x: vertices.scalability.x, y: vertices.scalability.y - 30, fill: '#ff00ff' }
+    ];
+    
+    labels.forEach(label => {
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', label.x);
+        text.setAttribute('y', label.y);
+        text.setAttribute('text-anchor', label.text === 'Scalability' ? 'middle' : (label.text === 'Security' ? 'start' : 'end'));
+        text.setAttribute('fill', label.fill);
+        text.setAttribute('font-weight', '700');
+        text.setAttribute('font-size', '14');
+        text.textContent = label.text;
+        svg.appendChild(text);
+    });
+    
+    // Calculate point position
+    const total = arch.decentralization + arch.security + arch.scalability;
+    const point = total === 0 ? { x: center, y: center } : {
+        x: (vertices.decentralization.x * arch.decentralization + 
+            vertices.security.x * arch.security + 
+            vertices.scalability.x * arch.scalability) / total,
+        y: (vertices.decentralization.y * arch.decentralization + 
+            vertices.security.y * arch.security + 
+            vertices.scalability.y * arch.scalability) / total
+    };
+    
+    // Draw lines to vertices
+    const lines = [
+        { to: vertices.decentralization, opacity: arch.decentralization / 100, color: '#06b6d4' },
+        { to: vertices.security, opacity: arch.security / 100, color: '#10b981' },
+        { to: vertices.scalability, opacity: arch.scalability / 100, color: '#a855f7' }
+    ];
+    
+    lines.forEach(line => {
+        const lineEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        lineEl.setAttribute('x1', point.x);
+        lineEl.setAttribute('y1', point.y);
+        lineEl.setAttribute('x2', line.to.x);
+        lineEl.setAttribute('y2', line.to.y);
+        lineEl.setAttribute('stroke', line.color);
+        lineEl.setAttribute('stroke-width', '1');
+        lineEl.setAttribute('opacity', line.opacity);
+        svg.appendChild(lineEl);
+    });
+    
+    // Draw point
+    const pointCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    pointCircle.setAttribute('cx', point.x);
+    pointCircle.setAttribute('cy', point.y);
+    pointCircle.setAttribute('r', '8');
+    pointCircle.setAttribute('fill', arch.color || '#3b82f6');
+    pointCircle.setAttribute('stroke', '#fff');
+    pointCircle.setAttribute('stroke-width', '2');
+    svg.appendChild(pointCircle);
+}
+
+function updateBlockchainScores(arch) {
+    document.getElementById('blockchain-dec-score').textContent = arch.decentralization + '%';
+    document.getElementById('blockchain-sec-score').textContent = arch.security + '%';
+    document.getElementById('blockchain-sca-score').textContent = arch.scalability + '%';
+    
+    document.getElementById('blockchain-dec-bar').style.width = arch.decentralization + '%';
+    document.getElementById('blockchain-sec-bar').style.width = arch.security + '%';
+    document.getElementById('blockchain-sca-bar').style.width = arch.scalability + '%';
+    
+    const total = arch.decentralization + arch.security + arch.scalability;
+    document.getElementById('blockchain-total-score').textContent = total;
+    
+    const totalEl = document.getElementById('blockchain-total-score');
+    // Trilemma constraint: warn if trying to maximize all three (total > 250 or all three > 60)
+    const allHigh = arch.decentralization > 60 && arch.security > 60 && arch.scalability > 60;
+    if (total > 250 || allHigh) {
+        totalEl.style.color = '#ff6b6b';
+    } else {
+        totalEl.style.color = '#00ffff';
+    }
+}
+
+function updateBlockchainCustomArch() {
+    customBlockchainArchitecture.decentralization = parseInt(document.getElementById('blockchain-dec-slider').value);
+    customBlockchainArchitecture.security = parseInt(document.getElementById('blockchain-sec-slider').value);
+    customBlockchainArchitecture.scalability = parseInt(document.getElementById('blockchain-sca-slider').value);
+    
+    document.getElementById('blockchain-custom-dec').textContent = customBlockchainArchitecture.decentralization + '%';
+    document.getElementById('blockchain-custom-sec').textContent = customBlockchainArchitecture.security + '%';
+    document.getElementById('blockchain-custom-sca').textContent = customBlockchainArchitecture.scalability + '%';
+    
+    renderBlockchainTriangle('blockchain-custom-triangle-svg', customBlockchainArchitecture);
+    updateBlockchainCustomTotal();
+}
+
+function updateBlockchainCustomTotal() {
+    const total = customBlockchainArchitecture.decentralization + customBlockchainArchitecture.security + customBlockchainArchitecture.scalability;
+    document.getElementById('blockchain-custom-total-value').textContent = total;
+    
+    const totalEl = document.getElementById('blockchain-custom-total');
+    const warningEl = document.getElementById('blockchain-custom-warning');
+    
+    // Trilemma constraint: cannot maximize all three dimensions simultaneously
+    // Warn if total > 250 (trying to maximize all three) OR all three are high (> 60)
+    const allHigh = customBlockchainArchitecture.decentralization > 60 && 
+                    customBlockchainArchitecture.security > 60 && 
+                    customBlockchainArchitecture.scalability > 60;
+    
+    if (total > 250 || allHigh) {
+        totalEl.classList.remove('valid');
+        totalEl.classList.add('invalid');
+        warningEl.style.display = 'block';
+    } else {
+        totalEl.classList.remove('invalid');
+        totalEl.classList.add('valid');
+        warningEl.style.display = 'none';
+    }
+}
+
+function visualizeBlockchainCustom() {
+    selectedBlockchainArchitecture = {
+        name: 'Custom Architecture',
+        ...customBlockchainArchitecture,
+        color: '#3b82f6',
+        description: 'Custom blockchain trilemma configuration'
+    };
+    renderBlockchainArchitectureGrid();
+    renderBlockchainTriangle('blockchain-triangle-svg', selectedBlockchainArchitecture);
+    updateBlockchainScores(selectedBlockchainArchitecture);
+    document.getElementById('blockchain-selected-arch-name').textContent = selectedBlockchainArchitecture.name;
+    document.getElementById('blockchain-selected-arch-description').textContent = selectedBlockchainArchitecture.description;
+    document.getElementById('blockchain-trilemma-position').textContent = getBlockchainTrilemmaPosition(selectedBlockchainArchitecture);
 }
 
 </script>
