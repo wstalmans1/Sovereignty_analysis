@@ -892,6 +892,92 @@
                     </div>
                 </div>
                 
+                <!-- Ring 4c: Infrastructure -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">4</span>
+                        Infrastructure Sovereignty: Storage Infrastructure & Self-Hosting
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">Where is data stored and who controls the infrastructure?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="4c" data-value="15" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Single Provider, Single Jurisdiction</div>
+                                    <div class="choice-description">
+                                        All data stored with one storage provider in one country/jurisdiction.
+                                        High risk of single point of failure and jurisdictional control.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 15%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="40" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Multiple Providers, Same Jurisdiction</div>
+                                    <div class="choice-description">
+                                        Data distributed across multiple storage providers, but all in same legal jurisdiction.
+                                        Reduces single provider risk but still vulnerable to jurisdiction-level actions.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 40%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="60" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Multiple Providers, Multiple Jurisdictions</div>
+                                    <div class="choice-description">
+                                        Data distributed across providers in different countries/jurisdictions.
+                                        Better resilience but still dependent on third-party providers.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 60%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="75" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">User-Selectable Providers</div>
+                                    <div class="choice-description">
+                                        Users can choose which storage providers to use from a decentralized network.
+                                        Users have control over provider selection but still rely on third parties.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 75%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="85" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Self-Hosted IPFS Node</div>
+                                    <div class="choice-description">
+                                        Users run their own IPFS node to pin and serve their data.
+                                        Full control over infrastructure, but requires technical knowledge and maintenance.
+                                        Data redundancy depends on other nodes pinning.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 85%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="95" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Self-Hosted IPFS Cluster</div>
+                                    <div class="choice-description">
+                                        Users run their own IPFS Cluster (multiple IPFS nodes) for redundancy and high availability.
+                                        Maximum infrastructure sovereignty: full control, geographic distribution, no third-party dependency.
+                                        Users own and operate their complete storage infrastructure.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 95%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <button class="calculate-btn" onclick="calculateSovereignty()">
                     Calculate Sovereignty Score
                 </button>
@@ -948,7 +1034,8 @@
             '4': null,
             '5': null,
             '5b': null,
-            '4b': null
+            '4b': null,
+            '4c': null
         };
         
         function selectChoice(element) {
@@ -968,7 +1055,7 @@
         // Calculate sovereignty
         function calculateSovereignty() {
             // Validate all selections
-            if (!selections['4'] || selections['5'] === null || !selections['5b'] || !selections['4b']) {
+            if (!selections['4'] || selections['5'] === null || !selections['5b'] || !selections['4b'] || !selections['4c']) {
                 alert('Please make a selection for each category before calculating.');
                 return;
             }
@@ -981,7 +1068,8 @@
             // Inner rings (user choices)
             const ring4Platform = selections['4'];
             const ring4Economic = selections['4b'];
-            const ring4 = Math.min(ring4Platform, ring4Economic);
+            const ring4Infrastructure = selections['4c'];
+            const ring4 = Math.min(ring4Platform, ring4Economic, ring4Infrastructure);
             
             const ring5Crypto = selections['5'];
             const ring5Retrieval = selections['5b'];
@@ -1094,6 +1182,39 @@
                 recommendations.push({
                     text: 'Allow users to pay storage providers directly instead of through you',
                     impact: `+${70 - selections['4b']}% potential gain`,
+                    priority: 'MEDIUM'
+                });
+            }
+            
+            // Infrastructure recommendations
+            if (selections['4c'] < 60) {
+                recommendations.push({
+                    text: 'Distribute data across multiple storage providers in different jurisdictions',
+                    impact: `+${60 - selections['4c']}% potential gain`,
+                    priority: 'HIGH'
+                });
+            }
+            
+            if (selections['4c'] < 75) {
+                recommendations.push({
+                    text: 'Enable users to select their own storage providers from a decentralized network',
+                    impact: `+${75 - selections['4c']}% potential gain`,
+                    priority: 'MEDIUM'
+                });
+            }
+            
+            if (selections['4c'] < 85) {
+                recommendations.push({
+                    text: 'Support self-hosted IPFS nodes - provide documentation and tooling for users to run their own IPFS node',
+                    impact: `+${85 - selections['4c']}% potential gain`,
+                    priority: 'HIGH'
+                });
+            }
+            
+            if (selections['4c'] < 95) {
+                recommendations.push({
+                    text: 'Enable self-hosted IPFS Cluster - support users running multiple IPFS nodes for redundancy and high availability',
+                    impact: `+${95 - selections['4c']}% potential gain (maximum infrastructure sovereignty)`,
                     priority: 'MEDIUM'
                 });
             }

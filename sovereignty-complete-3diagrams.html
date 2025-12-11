@@ -241,6 +241,503 @@
             font-weight: 700;
             font-size: 1.1rem;
         }
+        
+        /* Calculator styles */
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .calculator-section {
+            background: rgba(20, 20, 40, 0.6);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .calculator-section h3 {
+            color: #00ffff;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ring-number {
+            background: #00ffff;
+            color: #0a0a0f;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .choice-group {
+            margin: 20px 0;
+        }
+        
+        .choice-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8888aa;
+            font-size: 0.9rem;
+        }
+        
+        .choice-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .choice-option {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .choice-option:hover {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .choice-option.selected {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .choice-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ffff;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+        }
+        
+        .choice-option.selected .choice-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #00ffff;
+            border-radius: 50%;
+        }
+        
+        .choice-content {
+            flex: 1;
+        }
+        
+        .choice-title {
+            color: #e0e0ff;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .choice-description {
+            color: #8888aa;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        .choice-sovereignty {
+            color: #00ffff;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .results-panel {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 3px solid #00ffff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .final-score {
+            font-size: 4rem;
+            color: #00ffff;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        .score-label {
+            color: #8888aa;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .score-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #00ffff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .score-item-title {
+            color: #00ffff;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .score-item-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .recommendations {
+            background: rgba(255, 170, 0, 0.1);
+            border: 2px solid #ffaa00;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .recommendations h4 {
+            color: #ffaa00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .recommendation-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-left: 3px solid #ffaa00;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 5px;
+        }
+        
+        .recommendation-impact {
+            color: #00ffff;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .warning-box h4 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #00ffff, #00aaff);
+            border: none;
+            color: #0a0a0f;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffaa00, #ffff00, #00ffaa, #00ffff);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            font-weight: 700;
+            color: #0a0a0f;
+        }
+        
+        /* Trilemma Analyzer Styles */
+        .trilemma-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .trilemma-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .trilemma-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            background: linear-gradient(135deg, #00ffff, #ff00ff, #00ffaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .trilemma-header p {
+            color: #8888aa;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+        
+        .trilemma-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .trilemma-card {
+            background: rgba(20, 20, 40, 0.6);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .trilemma-card h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .triangle-chart {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .triangle-svg {
+            width: 100%;
+            height: auto;
+        }
+        
+        .architecture-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .architecture-card:hover {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .architecture-card.selected {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .architecture-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .architecture-name {
+            font-weight: 700;
+            color: #e0e0ff;
+            margin-bottom: 5px;
+        }
+        
+        .architecture-scores {
+            font-size: 0.85rem;
+            color: #8888aa;
+        }
+        
+        .dimension-bar {
+            margin: 15px 0;
+        }
+        
+        .dimension-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .dimension-bar-bg {
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .dimension-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .dimension-bar-fill.sovereignty {
+            background: linear-gradient(90deg, #00ffff, #00aaff);
+        }
+        
+        .dimension-bar-fill.persistence {
+            background: linear-gradient(90deg, #00ffaa, #00aa88);
+        }
+        
+        .dimension-bar-fill.practicality {
+            background: linear-gradient(90deg, #ff00ff, #aa00aa);
+        }
+        
+        .dimension-description {
+            font-size: 0.8rem;
+            color: #8888aa;
+            margin-top: 3px;
+        }
+        
+        .custom-builder {
+            background: rgba(20, 20, 40, 0.6);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .custom-builder h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .slider-group {
+            margin: 20px 0;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00ffff;
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00ffff;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .total-score {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .total-score.valid {
+            border: 2px solid #00ffaa;
+        }
+        
+        .total-score.invalid {
+            border: 2px solid #ff6b6b;
+        }
+        
+        .insights-box {
+            background: rgba(20, 20, 40, 0.6);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .insights-box h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .insight-item {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border-left: 3px solid #00ffff;
+        }
+        
+        .insight-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
@@ -257,6 +754,12 @@
             </button>
             <button class="tab-button" onclick="switchTab('overall')">
                 🎯 Overall DApp
+            </button>
+            <button class="tab-button" onclick="switchTab('calculator')">
+                🧮 DApp Calculator
+            </button>
+            <button class="tab-button" onclick="switchTab('trilemma')">
+                ⚖️ Storage Trilemma
             </button>
         </div>
         
@@ -388,6 +891,606 @@
                 </div>
             </div>
         </div>
+        
+        <!-- CALCULATOR TAB -->
+        <div id="calculator-tab" class="tab-content">
+            <div class="calculator-container">
+                <p style="text-align: center; color: #8888aa; margin-bottom: 30px;">
+                    Select your implementation choices for each sovereignty layer.<br>
+                    The calculator will show your final user sovereignty score and recommendations.
+                </p>
+                
+                <!-- Ring 4: Platform -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">4</span>
+                        Platform Sovereignty: Storage Identity Model
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">How do users store data in your DApp?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="4" data-value="20" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">API Key Model (Lighthouse Default)</div>
+                                    <div class="choice-description">
+                                        All users share YOUR API key. Data uploaded to YOUR account.
+                                        Users have no independent identity or namespace.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 20%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="50" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Platform Accounts</div>
+                                    <div class="choice-description">
+                                        Users create accounts on your platform. Data tied to platform identity.
+                                        Export possible but limited portability.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 50%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="70" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">UCAN Identity (Storacha)</div>
+                                    <div class="choice-description">
+                                        Users authenticate with their wallet/keypair. Data namespace owned by user.
+                                        Can access from other UCAN-compatible apps.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 70%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="85" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">UCAN + On-Chain Registry</div>
+                                    <div class="choice-description">
+                                        UCAN identity PLUS user deploys their own smart contract to record CIDs.
+                                        Full ownership proof on-chain. Maximum portability.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 85%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4" data-value="95" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Direct Filecoin Contracts</div>
+                                    <div class="choice-description">
+                                        Users propose storage deals directly via smart contracts (FRC-0068).
+                                        No platform intermediary. Maximum sovereignty but high complexity.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 95%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ring 4b: Economic -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">4</span>
+                        Economic Sovereignty: Payment Model
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">Who pays for storage and how?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="4b" data-value="10" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Free for Users (You Pay)</div>
+                                    <div class="choice-description">
+                                        You subsidize all storage costs. Users pay nothing.
+                                        Complete economic dependency on your business model.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 10%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="40" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Subscription Through You</div>
+                                    <div class="choice-description">
+                                        Users pay you subscription fees. You pay storage provider.
+                                        Users depend on your continued service.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 40%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="70" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Direct Payment to Provider (Storacha Subscription)</div>
+                                    <div class="choice-description">
+                                        Users create own account and pay Storacha/provider directly.
+                                        Economic relationship between user and provider.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 70%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="85" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Perpetual Payment (Lighthouse)</div>
+                                    <div class="choice-description">
+                                        User pays once from wallet for lifetime storage.
+                                        No recurring payments. Managed by smart contracts.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 85%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4b" data-value="95" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Direct Filecoin Deal Payment</div>
+                                    <div class="choice-description">
+                                        User pays storage providers directly via smart contracts.
+                                        User negotiates terms and manages deals. Maximum autonomy.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 95%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ring 4c: Infrastructure -->
+                <div class="calculator-section">
+                    <h3>
+                        <span class="ring-number">4</span>
+                        Infrastructure Sovereignty: Storage Infrastructure & Self-Hosting
+                    </h3>
+                    <div class="choice-group">
+                        <label class="choice-label">Where is data stored and who controls the infrastructure?</label>
+                        <div class="choice-options">
+                            <div class="choice-option" data-ring="4c" data-value="15" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Single Provider, Single Jurisdiction</div>
+                                    <div class="choice-description">
+                                        All data stored with one storage provider in one country/jurisdiction.
+                                        High risk of single point of failure and jurisdictional control.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 15%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="40" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Multiple Providers, Same Jurisdiction</div>
+                                    <div class="choice-description">
+                                        Data distributed across multiple storage providers, but all in same legal jurisdiction.
+                                        Reduces single provider risk but still vulnerable to jurisdiction-level actions.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 40%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="60" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Multiple Providers, Multiple Jurisdictions</div>
+                                    <div class="choice-description">
+                                        Data distributed across providers in different countries/jurisdictions.
+                                        Better resilience but still dependent on third-party providers.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 60%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="75" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">User-Selectable Providers</div>
+                                    <div class="choice-description">
+                                        Users can choose which storage providers to use from a decentralized network.
+                                        Users have control over provider selection but still rely on third parties.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 75%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="85" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Self-Hosted IPFS Node</div>
+                                    <div class="choice-description">
+                                        Users run their own IPFS node to pin and serve their data.
+                                        Full control over infrastructure, but requires technical knowledge and maintenance.
+                                        Data redundancy depends on other nodes pinning.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 85%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="choice-option" data-ring="4c" data-value="95" onclick="selectChoice(this)">
+                                <div class="choice-radio"></div>
+                                <div class="choice-content">
+                                    <div class="choice-title">Self-Hosted IPFS Cluster</div>
+                                    <div class="choice-description">
+                                        Users run their own IPFS Cluster (multiple IPFS nodes) for redundancy and high availability.
+                                        Maximum infrastructure sovereignty: full control, geographic distribution, no third-party dependency.
+                                        Users own and operate their complete storage infrastructure.
+                                    </div>
+                                    <div class="choice-sovereignty">Sovereignty: 95%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateSovereignty()">
+                    Calculate Sovereignty Score
+                </button>
+                
+                <div id="results" style="display: none;">
+                    <div class="results-panel">
+                        <div class="results-header">
+                            <div class="final-score" id="final-score">--</div>
+                            <div class="score-label">User Sovereignty Score</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill" style="width: 0%;">
+                                    <span id="progress-text"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="score-breakdown" id="score-breakdown">
+                            <!-- Breakdown will be inserted here -->
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h4>⚠️ Outer Ring Constraints (Cannot Be Changed)</h4>
+                            <p><strong>Ring 1 (Physical):</strong> 40% - Filecoin distributed storage providers globally. Limited by nation-state jurisdiction.</p>
+                            <p><strong>Ring 2 (Network):</strong> 50% - libp2p peer-to-peer overlay. Limited by ISP control and national firewalls.</p>
+                            <p><strong>Ring 3 (Protocol):</strong> 70% - Open IPFS/Filecoin protocols. Limited by Protocol Labs coordination.</p>
+                            <p style="margin-top: 15px; color: #ffaa00;"><strong>Your final score is MIN(outer rings, your choices)</strong></p>
+                        </div>
+                        
+                        <div class="recommendations" id="recommendations">
+                            <!-- Recommendations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TRILEMMA ANALYZER TAB -->
+        <div id="trilemma-tab" class="tab-content">
+            <div class="trilemma-container">
+                <div class="trilemma-header">
+                    <h2>Decentralized Storage Trilemma</h2>
+                    <p>You cannot maximize all three: pick two, sacrifice one</p>
+                </div>
+                
+                <!-- Narrative Explanation -->
+                <div class="trilemma-card" style="margin-bottom: 30px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: #00ffff; margin-top: 0; text-align: center; font-size: 1.5rem;">Understanding the Trilemma</h3>
+                    
+                    <div style="line-height: 1.8; color: #e0e0ff;">
+                        <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                            Imagine you're building a system to store data. You want three things: <strong style="color: #00ffff;">control</strong>, <strong style="color: #00ffaa;">reliability</strong>, and <strong style="color: #ff00ff;">ease of use</strong>. The harsh truth? <strong style="color: #ffaa00;">You can't have all three at maximum levels.</strong>
+                        </p>
+                        
+                        <div style="background: rgba(0, 255, 255, 0.1); border-left: 4px solid #00ffff; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                            <h4 style="color: #00ffff; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">The Three Dimensions</h4>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 10px;">
+                                    <strong style="color: #00ffff;">1. Sovereignty (Control)</strong> — How much do you actually control your infrastructure? Can someone else shut you down? Are you dependent on a service that could disappear tomorrow? Maximum sovereignty means you run everything yourself—no intermediaries, no trusted third parties, no single points of failure.
+                                </p>
+                                <p style="font-size: 0.9rem; color: #8888aa; margin-left: 20px;">
+                                    Think: Running your own server vs. using Dropbox. One gives you control, the other gives you convenience.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 10px;">
+                                    <strong style="color: #00ffaa;">2. Persistence (Reliability)</strong> — Will your data still be there in a year? In ten years? Do you have guarantees, proofs, or just hope? Maximum persistence means cryptographic proofs, economic incentives, redundancy across multiple independent parties—systems designed to survive even if individual components fail.
+                                </p>
+                                <p style="font-size: 0.9rem; color: #8888aa; margin-left: 20px;">
+                                    Think: Filecoin's cryptographic storage proofs vs. asking your friend to keep a backup. One has guarantees, the other has trust.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <p style="margin-bottom: 10px;">
+                                    <strong style="color: #ff00ff;">3. Practicality (Ease of Use)</strong> — Can a normal person use this? How much technical knowledge is required? How long does setup take? Maximum practicality means one-click solutions, zero maintenance, works out of the box—the kind of experience people expect from modern apps.
+                                </p>
+                                <p style="font-size: 0.9rem; color: #8888aa; margin-left: 20px;">
+                                    Think: Clicking "Upload to Dropbox" vs. configuring an IPFS node, managing keys, and maintaining infrastructure.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255, 170, 0, 0.1); border-left: 4px solid #ffaa00; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                            <h4 style="color: #ffaa00; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">Why You Can't Have It All</h4>
+                            
+                            <p style="margin-bottom: 15px;">
+                                Here's the fundamental constraint: <strong>These three dimensions are in tension with each other.</strong>
+                            </p>
+                            
+                            <p style="margin-bottom: 15px;">
+                                Want <strong style="color: #00ffff;">maximum sovereignty</strong>? You need to run your own infrastructure. That means technical complexity, maintenance overhead, and accepting responsibility. <strong style="color: #ff00ff;">Practicality suffers.</strong>
+                            </p>
+                            
+                            <p style="margin-bottom: 15px;">
+                                Want <strong style="color: #00ffaa;">guaranteed persistence</strong>? You need cryptographic proofs, economic incentives, redundancy systems. That means complex protocols, payment infrastructure, and coordination mechanisms. <strong style="color: #ff00ff;">Practicality suffers.</strong>
+                            </p>
+                            
+                            <p style="margin-bottom: 15px;">
+                                Want <strong style="color: #ff00ff;">maximum practicality</strong>? You need abstraction layers, managed services, "it just works" experiences. That means trusting third parties, accepting vendor lock-in, and giving up control. <strong style="color: #00ffff;">Sovereignty suffers.</strong>
+                            </p>
+                            
+                            <p style="font-size: 1.05rem; color: #ffaa00; font-weight: 700; margin-top: 20px;">
+                                The trilemma forces you to choose: Which two matter most? What are you willing to sacrifice?
+                            </p>
+                        </div>
+                        
+                        <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                            <h4 style="color: #00ffaa; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">Real-World Examples</h4>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>Dropbox (Persistence + Practicality, Sacrifice Sovereignty)</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    Easy to use? Absolutely. Reliable? Yes, with SLAs and guarantees. But you're trusting a company, subject to their terms of service, vulnerable to censorship, and locked into their platform. Sovereignty: 5%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>Lighthouse (API Key Model) - Persistence + Practicality, Sacrifice Sovereignty</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    All users share YOUR API key. Data uploaded to YOUR account. Users have no independent identity. Very easy to use, decent persistence through Filecoin, but sovereignty is extremely low. If Lighthouse shuts down, users lose everything. Sovereignty: 20%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>Storacha/Web3.Storage (UCAN) - Persistence + Practicality, Sacrifice Sovereignty</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    Uses UCAN identity—better than API keys! Users own their namespace. But you're still using their API, their service, their infrastructure. If they shut down, you lose access. The "decentralization" is hidden behind a centralized interface. Sovereignty: 30%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>Direct Lotus API - Persistence + Some Sovereignty, Sacrifice Practicality</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    More control than services, cryptographic guarantees, but still uses centralized Lotus endpoints. Complex setup, medium sovereignty ceiling. Sovereignty: 40%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>Direct Filecoin Deals (FRC-0068) - Persistence + Sovereignty, Sacrifice Practicality</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    Users propose storage deals directly via smart contracts. No platform intermediary. Maximum autonomy, cryptographic proofs, but extremely high complexity. Users negotiate terms and manage deals themselves. Sovereignty: 50%, Practicality: 25%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>Self-Hosted IPFS Node (Solo) - Sovereignty + Practicality, Sacrifice Persistence</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    User runs single IPFS node. Full infrastructure control, reasonable setup complexity. But no redundancy—data persists only while node is running. Single point of failure. Sovereignty: 85%, Persistence: 20%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong style="color: #00ffff;">Self-Hosted IPFS Cluster - Maximum Sovereignty + Some Persistence, Moderate Practicality</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    User runs multiple IPFS nodes (cluster) for redundancy and high availability. Maximum infrastructure sovereignty with geographic distribution. No third-party dependency. Users own and operate complete storage infrastructure. Still user-responsible but with redundancy. Sovereignty: 95%, Persistence: 60%, Practicality: 45%. <strong style="color: #00ffff;">This is the maximum practical infrastructure sovereignty.</strong>
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>Self-Hosted IPFS + Filecoin Node - Sovereignty + Persistence, Sacrifice Practicality</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    You control the infrastructure. You get cryptographic storage proofs. But you need 1TB+ storage, days of syncing, technical expertise, and ongoing maintenance. Most users can't do this. Practicality: 15%.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <p style="margin-bottom: 8px;">
+                                    <strong style="color: #00ffff;">Mutual IPFS Pinning Network - Sovereignty + Practicality, Sacrifice Persistence</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    Users run lightweight IPFS nodes, voluntarily pin each other's content. No centralized service. Censorship-resistant. Reasonable setup complexity. But there are no guarantees—data persists only as long as someone pins it. No cryptographic proofs. No economic incentives. Persistence: 40%. <strong style="color: #00ffff;">This is the honest tradeoff: sovereignty requires responsibility.</strong>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255, 107, 107, 0.1); border-left: 4px solid #ff6b6b; padding: 20px; margin: 25px 0; border-radius: 8px;">
+                            <h4 style="color: #ff6b6b; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">The Honesty Principle</h4>
+                            
+                            <p style="margin-bottom: 15px;">
+                                Many "decentralized" services lie by omission. They market themselves as decentralized while using centralized APIs. They promise "guaranteed storage" through services you depend on. They create the illusion of sovereignty without the substance.
+                            </p>
+                            
+                            <p style="margin-bottom: 15px;">
+                                The trilemma framework forces honesty: <strong>If you want true sovereignty, you must accept responsibility.</strong> If you want guarantees, you must accept complexity or dependency. If you want convenience, you must accept that someone else has control.
+                            </p>
+                            
+                            <p style="font-size: 1.05rem; color: #00ffff; font-weight: 700; margin-top: 20px;">
+                                The mutual IPFS pinning network doesn't compromise—it makes the philosophically honest choice: maximize sovereignty and maintain reasonable practicality by explicitly placing persistence responsibility on users themselves.
+                            </p>
+                            
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-top: 15px; font-style: italic;">
+                                This is not a bug—it's the honest architecture. Users who want control must accept that they are responsible for keeping their nodes running, that data persists only as long as someone pins it, and that there are no service provider guarantees. In exchange, they get actual sovereignty—not the illusion of it.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="trilemma-grid">
+                    <!-- Triangle Visualization -->
+                    <div class="trilemma-card">
+                        <h3 id="selected-arch-name">Mutual IPFS Pinning Network</h3>
+                        <div class="triangle-chart">
+                            <svg id="triangle-svg" class="triangle-svg" viewBox="0 0 400 400"></svg>
+                        </div>
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 8px;">
+                            <p id="selected-arch-description" style="font-size: 0.9rem; color: #8888aa; margin: 0;">
+                                High sovereignty, social persistence, moderate setup
+                            </p>
+                            <div style="margin-top: 10px; font-size: 0.85rem; color: #00ffff;">
+                                Position: <span id="trilemma-position">Sovereignty + Practicality</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dimension Scores -->
+                    <div class="trilemma-card">
+                        <h3>Dimension Scores</h3>
+                        <div class="dimension-bar">
+                            <div class="dimension-label">
+                                <span style="color: #00ffff;">Sovereignty</span>
+                                <span id="sov-score">90%</span>
+                            </div>
+                            <div class="dimension-bar-bg">
+                                <div id="sov-bar" class="dimension-bar-fill sovereignty" style="width: 90%;"></div>
+                            </div>
+                            <div class="dimension-description">User control, censorship resistance</div>
+                        </div>
+                        
+                        <div class="dimension-bar">
+                            <div class="dimension-label">
+                                <span style="color: #00ffaa;">Persistence</span>
+                                <span id="per-score">40%</span>
+                            </div>
+                            <div class="dimension-bar-bg">
+                                <div id="per-bar" class="dimension-bar-fill persistence" style="width: 40%;"></div>
+                            </div>
+                            <div class="dimension-description">Durability guarantees, redundancy</div>
+                        </div>
+                        
+                        <div class="dimension-bar">
+                            <div class="dimension-label">
+                                <span style="color: #ff00ff;">Practicality</span>
+                                <span id="pra-score">60%</span>
+                            </div>
+                            <div class="dimension-bar-bg">
+                                <div id="pra-bar" class="dimension-bar-fill practicality" style="width: 60%;"></div>
+                            </div>
+                            <div class="dimension-description">Ease of use, setup complexity</div>
+                        </div>
+                        
+                        <div style="margin-top: 25px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; border: 1px solid rgba(0, 255, 255, 0.3);">
+                            <h4 style="color: #00ffff; margin-top: 0; font-size: 0.9rem; margin-bottom: 10px;">Trilemma Constraint Analysis</h4>
+                            <div style="font-size: 0.85rem; color: #e0e0ff;">
+                                Total Score: <span id="total-score" style="color: #00ffff; font-weight: 700;">190</span> / 200 theoretical max
+                            </div>
+                            <div style="font-size: 0.75rem; color: #8888aa; margin-top: 8px;">
+                                ⚠️ Scores totaling &gt;200 would violate the trilemma constraint
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Architecture Selector -->
+                <div class="trilemma-card" style="margin-bottom: 30px;">
+                    <h3>Compare Architectures</h3>
+                    <div id="architecture-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <!-- Architectures will be inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Custom Builder -->
+                <div class="custom-builder">
+                    <h3>Build Custom Architecture</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
+                        <div>
+                            <div class="slider-group">
+                                <div class="slider-label">
+                                    <span style="color: #00ffff;">Sovereignty</span>
+                                    <span id="custom-sov">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" id="sov-slider" class="slider" oninput="updateCustomArch()">
+                            </div>
+                            
+                            <div class="slider-group">
+                                <div class="slider-label">
+                                    <span style="color: #00ffaa;">Persistence</span>
+                                    <span id="custom-per">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" id="per-slider" class="slider" oninput="updateCustomArch()">
+                            </div>
+                            
+                            <div class="slider-group">
+                                <div class="slider-label">
+                                    <span style="color: #ff00ff;">Practicality</span>
+                                    <span id="custom-pra">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" id="pra-slider" class="slider" oninput="updateCustomArch()">
+                            </div>
+                            
+                            <button onclick="visualizeCustom()" style="width: 100%; background: linear-gradient(135deg, #00ffff, #00aaff); border: none; color: #0a0a0f; padding: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 15px; transition: all 0.3s;">
+                                Visualize Custom Architecture
+                            </button>
+                            
+                            <div id="custom-total" class="total-score valid" style="margin-top: 20px;">
+                                <div style="color: #e0e0ff;">
+                                    Total: <span id="custom-total-value" style="font-weight: 700; color: #00ffaa;">150</span> / 200
+                                </div>
+                                <div id="custom-warning" style="font-size: 0.75rem; color: #ff6b6b; margin-top: 8px; display: none;">
+                                    ⚠️ This violates the trilemma constraint - impossible to achieve in practice
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="triangle-chart">
+                                <svg id="custom-triangle-svg" class="triangle-svg" viewBox="0 0 400 400"></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Insights -->
+                <div class="insights-box">
+                    <h3>Key Insights</h3>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #00ffff;">→</span>
+                        <p><strong>No perfect solution exists.</strong> Every architecture makes explicit tradeoffs.</p>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #00ffaa;">→</span>
+                        <p><strong>Mutual IPFS pinning</strong> (90% sovereignty, 40% persistence, 60% practicality) represents an honest choice: maximize user control by placing persistence responsibility on users themselves.</p>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #ff00ff;">→</span>
+                        <p><strong>Traditional services</strong> sacrifice sovereignty for convenience—but so does direct Lotus API usage (centralized endpoint).</p>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon" style="color: #ffaa00;">→</span>
+                        <p><strong>True sovereignty requires user responsibility.</strong> If you want control, you must maintain your own infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -396,6 +1499,11 @@
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             event.target.classList.add('active');
             document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Initialize trilemma when tab is shown
+            if (tabName === 'trilemma') {
+                setTimeout(initTrilemma, 100);
+            }
         }
         
         // USER SOVEREIGNTY DATA
@@ -516,6 +1624,18 @@
                         resistance: "Medium - Better than API key model"
                     },
                     {
+                        name: "Storage Providers",
+                        power: "Physical infrastructure, geographic location, jurisdiction",
+                        constraint: "Can terminate service, change pricing, be seized by authorities",
+                        resistance: "Medium - Can switch providers, but dependency remains"
+                    },
+                    {
+                        name: "Third-Party Infrastructure",
+                        power: "Control over where data is stored and who operates nodes",
+                        constraint: "Single point of failure, jurisdictional risk, provider lock-in",
+                        resistance: "High - Requires self-hosting to eliminate"
+                    },
+                    {
                         name: "Public IPFS Gateways",
                         power: "HTTP access to IPFS network",
                         constraint: "Can go offline, block content, rate limit",
@@ -528,9 +1648,9 @@
                         resistance: "Low - User can bypass if Ring 5 is strong"
                     }
                 ],
-                currentPower: "Lighthouse: Centralized API keys • Storacha: Better (UCAN) but still a service",
-                decentralization: "UCAN: User-owned identity • Multiple gateways • Direct smart contract access",
-                implication: "If platform shuts down with API key model, user loses identity—even if data exists"
+                currentPower: "Ring 4 has THREE dimensions: (1) Identity Model: Lighthouse API keys (20%) vs UCAN (70-85%) • (2) Economic: You pay (10%) vs Direct payment (85-95%) • (3) Infrastructure: Single provider (15%) vs Self-hosted IPFS Cluster (95%)",
+                decentralization: "UCAN: User-owned identity • Direct smart contract access • Self-hosted IPFS nodes (85%) • Self-hosted IPFS Cluster (95%) - Maximum infrastructure sovereignty",
+                implication: "Ring 4 = MIN(Identity, Economic, Infrastructure). If you use API keys (20%) but have perfect infrastructure (95%), Ring 4 is still 20%. Self-hosting IPFS Cluster eliminates third-party infrastructure dependency but cannot overcome weak identity or economic models."
             },
             ring5: {
                 name: "CRYPTOGRAPHIC SOVEREIGNTY",
@@ -939,9 +2059,45 @@
                 html = `
                     <h2>${ring.name}</h2>
                     <p><strong>Sovereignty at This Layer:</strong> <span class="score-badge">${ring.sovereignty}%</span></p>
-                    
-                    <h3>Power Holders & Constraints:</h3>
                 `;
+                
+                // Special section for Ring 4 explaining the three dimensions
+                if (ringKey === 'ring4' && !isDev) {
+                    html += `
+                        <div class="info-section" style="border-left-color: #00ffff; background: rgba(0, 255, 255, 0.1); margin: 15px 0;">
+                            <h3 style="color: #00ffff; margin-top: 0;">Ring 4 Has THREE Dimensions:</h3>
+                            <p><strong>1. Identity Model (Storage Identity):</strong> How users authenticate and own their data namespace</p>
+                            <ul style="margin: 8px 0 15px 20px;">
+                                <li>API Key Model: 20% (all users share your key)</li>
+                                <li>UCAN Identity: 70% (user-owned namespace)</li>
+                                <li>UCAN + On-Chain Registry: 85% (full ownership proof)</li>
+                            </ul>
+                            
+                            <p><strong>2. Economic Model (Payment):</strong> Who pays for storage and how</p>
+                            <ul style="margin: 8px 0 15px 20px;">
+                                <li>You Pay: 10% (complete dependency)</li>
+                                <li>Subscription Through You: 40%</li>
+                                <li>Direct Payment to Provider: 70%</li>
+                                <li>Perpetual Payment: 85%</li>
+                                <li>Direct Filecoin Deals: 95%</li>
+                            </ul>
+                            
+                            <p><strong>3. Infrastructure Model (Storage Infrastructure):</strong> Where data is stored and who controls it</p>
+                            <ul style="margin: 8px 0 15px 20px;">
+                                <li>Single Provider: 15% (high risk)</li>
+                                <li>Multiple Providers, Multiple Jurisdictions: 60%</li>
+                                <li>User-Selectable Providers: 75%</li>
+                                <li><strong style="color: #00ffff;">Self-Hosted IPFS Node: 85%</strong> (full infrastructure control)</li>
+                                <li><strong style="color: #00ffff;">Self-Hosted IPFS Cluster: 95%</strong> (maximum sovereignty - redundancy + control)</li>
+                            </ul>
+                            
+                            <p style="margin-top: 15px; color: #ffaa00;"><strong>Ring 4 = MIN(Identity, Economic, Infrastructure)</strong></p>
+                            <p style="font-size: 0.9rem;">The weakest dimension determines your Ring 4 score. Self-hosting eliminates third-party infrastructure dependency but cannot overcome weak identity or economic models.</p>
+                        </div>
+                    `;
+                }
+                
+                html += `<h3>Power Holders & Constraints:</h3>`;
                 
                 ring.powerHolders.forEach(holder => {
                     html += `
@@ -1273,4 +2429,469 @@ Result: 4x improvement from 10% → 40%!
     
     container.appendChild(radicleTab);
 });
+
+// Calculator functionality
+const selections = {
+    '4': null,
+    '4b': null,
+    '4c': null
+};
+
+function selectChoice(element) {
+    const ring = element.getAttribute('data-ring');
+    const value = parseInt(element.getAttribute('data-value'));
+    
+    // Deselect others in same ring
+    document.querySelectorAll(`[data-ring="${ring}"]`).forEach(el => {
+        el.classList.remove('selected');
+    });
+    
+    // Select this one
+    element.classList.add('selected');
+    selections[ring] = value;
+}
+
+function calculateSovereignty() {
+    // Validate all selections
+    if (!selections['4'] || !selections['4b'] || !selections['4c']) {
+        alert('Please make a selection for each Ring 4 category before calculating.');
+        return;
+    }
+    
+    // Outer rings (fixed)
+    const ring1 = 40; // Physical
+    const ring2 = 50; // Network
+    const ring3 = 70; // Protocol
+    
+    // Inner rings (user choices) - Ring 4 is MIN of all three dimensions
+    const ring4Platform = selections['4'];
+    const ring4Economic = selections['4b'];
+    const ring4Infrastructure = selections['4c'];
+    const ring4 = Math.min(ring4Platform, ring4Economic, ring4Infrastructure);
+    
+    // Final score = MIN of all rings
+    const finalScore = Math.min(ring1, ring2, ring3, ring4);
+    
+    // Display results
+    document.getElementById('final-score').textContent = finalScore + '%';
+    document.getElementById('progress-fill').style.width = finalScore + '%';
+    document.getElementById('progress-text').textContent = finalScore + '%';
+    
+    // Breakdown
+    const breakdown = document.getElementById('score-breakdown');
+    breakdown.innerHTML = `
+        <div class="score-item">
+            <div class="score-item-title">Ring 1: Physical</div>
+            <div class="score-item-value">${ring1}%</div>
+            <div style="font-size: 0.8rem; color: #8888aa; margin-top: 5px;">Filecoin Network (Fixed)</div>
+        </div>
+        <div class="score-item">
+            <div class="score-item-title">Ring 2: Network</div>
+            <div class="score-item-value">${ring2}%</div>
+            <div style="font-size: 0.8rem; color: #8888aa; margin-top: 5px;">libp2p/IPFS (Fixed)</div>
+        </div>
+        <div class="score-item">
+            <div class="score-item-title">Ring 3: Protocol</div>
+            <div class="score-item-value">${ring3}%</div>
+            <div style="font-size: 0.8rem; color: #8888aa; margin-top: 5px;">IPFS/Filecoin (Fixed)</div>
+        </div>
+        <div class="score-item">
+            <div class="score-item-title">Ring 4: Platform</div>
+            <div class="score-item-value">${ring4}%</div>
+            <div style="font-size: 0.8rem; color: #00ffff; margin-top: 5px;">MIN(Identity: ${ring4Platform}%, Economic: ${ring4Economic}%, Infrastructure: ${ring4Infrastructure}%)</div>
+        </div>
+    `;
+    
+    // Recommendations
+    const recommendations = generateRecommendations(finalScore, ring4, ring4Platform, ring4Economic, ring4Infrastructure, selections);
+    document.getElementById('recommendations').innerHTML = recommendations;
+    
+    // Show results
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function generateRecommendations(finalScore, ring4, ring4Platform, ring4Economic, ring4Infrastructure, selections) {
+    let html = '<h4>💡 Recommendations to Improve Sovereignty</h4>';
+    const recommendations = [];
+    
+    // Platform recommendations
+    if (selections['4'] < 70) {
+        recommendations.push({
+            text: 'Upgrade to UCAN identity model (Storacha) instead of API keys',
+            impact: `+${70 - selections['4']}% potential gain`,
+            priority: 'HIGH'
+        });
+    }
+    
+    if (selections['4'] < 85) {
+        recommendations.push({
+            text: 'Add on-chain registry where users record their CIDs in their own smart contracts',
+            impact: `+${85 - selections['4']}% potential gain`,
+            priority: 'MEDIUM'
+        });
+    }
+    
+    // Economic recommendations
+    if (selections['4b'] < 70) {
+        recommendations.push({
+            text: 'Allow users to pay storage providers directly instead of through you',
+            impact: `+${70 - selections['4b']}% potential gain`,
+            priority: 'MEDIUM'
+        });
+    }
+    
+    // Infrastructure recommendations - emphasizing self-hosting
+    if (selections['4c'] < 60) {
+        recommendations.push({
+            text: 'Distribute data across multiple storage providers in different jurisdictions',
+            impact: `+${60 - selections['4c']}% potential gain`,
+            priority: 'HIGH'
+        });
+    }
+    
+    if (selections['4c'] < 75) {
+        recommendations.push({
+            text: 'Enable users to select their own storage providers from a decentralized network',
+            impact: `+${75 - selections['4c']}% potential gain`,
+            priority: 'MEDIUM'
+        });
+    }
+    
+    if (selections['4c'] < 85) {
+        recommendations.push({
+            text: 'Support self-hosted IPFS nodes - provide documentation and tooling for users to run their own IPFS node',
+            impact: `+${85 - selections['4c']}% potential gain`,
+            priority: 'HIGH'
+        });
+    }
+    
+    if (selections['4c'] < 95) {
+        recommendations.push({
+            text: 'Enable self-hosted IPFS Cluster - support users running multiple IPFS nodes for redundancy and high availability',
+            impact: `+${95 - selections['4c']}% potential gain (maximum infrastructure sovereignty)`,
+            priority: 'HIGH'
+        });
+    }
+    
+    if (recommendations.length === 0) {
+        html += '<p style="color: #00ffff;">✅ Excellent! You\'re using best practices for maximum feasible user sovereignty.</p>';
+        html += '<div class="recommendation-item">';
+        html += '<strong>Only constraint:</strong> Outer rings (Physical, Network, Protocol) limit final score to 40-70% regardless of your choices.';
+        html += '<div style="margin-top: 10px; color: #8888aa;">This is the reality of current decentralized infrastructure. No individual can achieve 100% sovereignty.</div>';
+        html += '</div>';
+    } else {
+        recommendations.forEach(rec => {
+            html += '<div class="recommendation-item">';
+            html += `<strong>[${rec.priority} PRIORITY]</strong> ${rec.text}`;
+            html += `<div class="recommendation-impact">Impact: ${rec.impact}</div>`;
+            html += '</div>';
+        });
+    }
+    
+    // Reality check
+    html += '<div class="recommendation-item" style="margin-top: 20px; border-left-color: #ff6b6b;">';
+    html += '<strong>🎯 The Hard Truth:</strong><br>';
+    html += `Even with perfect implementation (85-95%), your final user sovereignty is limited to <strong>${Math.min(40, ring4)}%</strong> because of outer ring constraints.`;
+    html += '<div style="margin-top: 10px;">Outer rings (Physical infrastructure, Network routing, Protocol governance) create a ceiling that individual DApps cannot overcome.</div>';
+    html += '</div>';
+    
+    return html;
+}
+
+// Trilemma Analyzer
+const TRILEMMA_ARCHITECTURES = [
+    {
+        name: 'Centralized Cloud (Dropbox)',
+        sovereignty: 5,
+        persistence: 95,
+        practicality: 100,
+        color: '#ef4444',
+        description: 'Traditional model: maximum convenience, zero sovereignty'
+    },
+    {
+        name: 'Lighthouse (API Key Model)',
+        sovereignty: 20,
+        persistence: 80,
+        practicality: 85,
+        color: '#f97316',
+        description: 'Centralized API keys, all users share YOUR key. Data uploaded to YOUR account. Low sovereignty, decent persistence, easy to use'
+    },
+    {
+        name: 'Storacha / Web3.Storage (UCAN)',
+        sovereignty: 30,
+        persistence: 85,
+        practicality: 90,
+        color: '#fb923c',
+        description: 'UCAN identity model: better than API keys, but still service-dependent. Users own namespace but depend on Storacha infrastructure'
+    },
+    {
+        name: 'Direct Lotus API',
+        sovereignty: 40,
+        persistence: 90,
+        practicality: 40,
+        color: '#eab308',
+        description: 'More control, cryptographic guarantees, but still uses centralized Lotus endpoints. Complex setup, medium sovereignty ceiling'
+    },
+    {
+        name: 'Direct Filecoin Deals (FRC-0068)',
+        sovereignty: 50,
+        persistence: 95,
+        practicality: 25,
+        color: '#a3e635',
+        description: 'Users propose storage deals directly via smart contracts. No platform intermediary, but high complexity and technical requirements'
+    },
+    {
+        name: 'Self-Hosted IPFS Node (Solo)',
+        sovereignty: 85,
+        persistence: 20,
+        practicality: 50,
+        color: '#06b6d4',
+        description: 'User runs single IPFS node. Full infrastructure control, but no redundancy. Data persists only while node is running. User fully responsible'
+    },
+    {
+        name: 'Self-Hosted IPFS Cluster',
+        sovereignty: 95,
+        persistence: 60,
+        practicality: 45,
+        color: '#00ffff',
+        description: 'User runs multiple IPFS nodes (cluster) for redundancy. Maximum infrastructure sovereignty with geographic distribution. Still user-responsible but with redundancy'
+    },
+    {
+        name: 'Mutual IPFS Pinning Network',
+        sovereignty: 90,
+        persistence: 40,
+        practicality: 60,
+        color: '#10b981',
+        description: 'Users run IPFS nodes, voluntarily pin each other\'s content. High sovereignty, social persistence, moderate setup. Honest architecture'
+    },
+    {
+        name: 'Self-Hosted IPFS + Filecoin Node',
+        sovereignty: 80,
+        persistence: 95,
+        practicality: 15,
+        color: '#84cc16',
+        description: 'Full control + cryptographic storage proofs. Requires 1TB+ storage, days of syncing, expert-level technical knowledge'
+    }
+];
+
+let selectedArchitecture = TRILEMMA_ARCHITECTURES[7]; // Mutual IPFS default
+let customArchitecture = { sovereignty: 50, persistence: 50, practicality: 50 };
+
+// Initialize trilemma when tab is shown
+function initTrilemma() {
+    renderArchitectureGrid();
+    renderTriangle('triangle-svg', selectedArchitecture);
+    updateScores(selectedArchitecture);
+    renderTriangle('custom-triangle-svg', customArchitecture);
+    updateCustomTotal();
+}
+
+function renderArchitectureGrid() {
+    const grid = document.getElementById('architecture-grid');
+    if (!grid) return;
+    
+    grid.innerHTML = TRILEMMA_ARCHITECTURES.map(arch => `
+        <div class="architecture-card ${arch.name === selectedArchitecture.name ? 'selected' : ''}" 
+             onclick="selectArchitecture('${arch.name}')">
+            <div>
+                <span class="architecture-color" style="background-color: ${arch.color};"></span>
+                <span class="architecture-name">${arch.name}</span>
+            </div>
+            <div class="architecture-scores">
+                S: ${arch.sovereignty}% | P: ${arch.persistence}% | Pr: ${arch.practicality}%
+            </div>
+        </div>
+    `).join('');
+}
+
+function selectArchitecture(name) {
+    selectedArchitecture = TRILEMMA_ARCHITECTURES.find(a => a.name === name);
+    renderArchitectureGrid();
+    renderTriangle('triangle-svg', selectedArchitecture);
+    updateScores(selectedArchitecture);
+    document.getElementById('selected-arch-name').textContent = selectedArchitecture.name;
+    document.getElementById('selected-arch-description').textContent = selectedArchitecture.description;
+    document.getElementById('trilemma-position').textContent = getTrilemmaPosition(selectedArchitecture);
+}
+
+function getTrilemmaPosition(arch) {
+    const scores = [
+        { dim: 'Sovereignty + Persistence', value: arch.sovereignty + arch.persistence },
+        { dim: 'Persistence + Practicality', value: arch.persistence + arch.practicality },
+        { dim: 'Sovereignty + Practicality', value: arch.sovereignty + arch.practicality }
+    ];
+    return scores.sort((a, b) => b.value - a.value)[0].dim;
+}
+
+function renderTriangle(svgId, arch) {
+    const svg = document.getElementById(svgId);
+    if (!svg) return;
+    
+    svg.innerHTML = '';
+    const size = 400;
+    const center = size / 2;
+    const radius = size / 2 - 60;
+    
+    // Triangle vertices
+    const vertices = {
+        sovereignty: { x: center, y: 60 },
+        persistence: { x: center + radius * 0.866, y: center + radius * 0.5 },
+        practicality: { x: center - radius * 0.866, y: center + radius * 0.5 }
+    };
+    
+    // Draw triangle
+    const triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    triangle.setAttribute('points', 
+        `${vertices.sovereignty.x},${vertices.sovereignty.y} ${vertices.persistence.x},${vertices.persistence.y} ${vertices.practicality.x},${vertices.practicality.y}`);
+    triangle.setAttribute('fill', 'none');
+    triangle.setAttribute('stroke', '#4b5563');
+    triangle.setAttribute('stroke-width', '2');
+    svg.appendChild(triangle);
+    
+    // Draw grid lines
+    [0.25, 0.5, 0.75].forEach(factor => {
+        const innerVertices = {
+            sovereignty: { 
+                x: center + (vertices.sovereignty.x - center) * factor,
+                y: center + (vertices.sovereignty.y - center) * factor
+            },
+            persistence: { 
+                x: center + (vertices.persistence.x - center) * factor,
+                y: center + (vertices.persistence.y - center) * factor
+            },
+            practicality: { 
+                x: center + (vertices.practicality.x - center) * factor,
+                y: center + (vertices.practicality.y - center) * factor
+            }
+        };
+        const gridLine = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        gridLine.setAttribute('points',
+            `${innerVertices.sovereignty.x},${innerVertices.sovereignty.y} ${innerVertices.persistence.x},${innerVertices.persistence.y} ${innerVertices.practicality.x},${innerVertices.practicality.y}`);
+        gridLine.setAttribute('fill', 'none');
+        gridLine.setAttribute('stroke', '#374151');
+        gridLine.setAttribute('stroke-width', '1');
+        gridLine.setAttribute('opacity', '0.3');
+        svg.appendChild(gridLine);
+    });
+    
+    // Labels
+    const labels = [
+        { text: 'Sovereignty', x: vertices.sovereignty.x, y: vertices.sovereignty.y - 15, fill: '#00ffff' },
+        { text: 'Persistence', x: vertices.persistence.x + 20, y: vertices.persistence.y + 5, fill: '#00ffaa' },
+        { text: 'Practicality', x: vertices.practicality.x - 20, y: vertices.practicality.y + 5, fill: '#ff00ff' }
+    ];
+    
+    labels.forEach(label => {
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', label.x);
+        text.setAttribute('y', label.y);
+        text.setAttribute('text-anchor', label.text === 'Sovereignty' ? 'middle' : (label.text === 'Persistence' ? 'start' : 'end'));
+        text.setAttribute('fill', label.fill);
+        text.setAttribute('font-weight', '700');
+        text.setAttribute('font-size', '14');
+        text.textContent = label.text;
+        svg.appendChild(text);
+    });
+    
+    // Calculate point position
+    const total = arch.sovereignty + arch.persistence + arch.practicality;
+    const point = total === 0 ? { x: center, y: center } : {
+        x: (vertices.sovereignty.x * arch.sovereignty + 
+            vertices.persistence.x * arch.persistence + 
+            vertices.practicality.x * arch.practicality) / total,
+        y: (vertices.sovereignty.y * arch.sovereignty + 
+            vertices.persistence.y * arch.persistence + 
+            vertices.practicality.y * arch.practicality) / total
+    };
+    
+    // Draw lines to vertices
+    const lines = [
+        { to: vertices.sovereignty, opacity: arch.sovereignty / 100, color: '#06b6d4' },
+        { to: vertices.persistence, opacity: arch.persistence / 100, color: '#10b981' },
+        { to: vertices.practicality, opacity: arch.practicality / 100, color: '#a855f7' }
+    ];
+    
+    lines.forEach(line => {
+        const lineEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        lineEl.setAttribute('x1', point.x);
+        lineEl.setAttribute('y1', point.y);
+        lineEl.setAttribute('x2', line.to.x);
+        lineEl.setAttribute('y2', line.to.y);
+        lineEl.setAttribute('stroke', line.color);
+        lineEl.setAttribute('stroke-width', '1');
+        lineEl.setAttribute('opacity', line.opacity);
+        svg.appendChild(lineEl);
+    });
+    
+    // Draw point
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', point.x);
+    circle.setAttribute('cy', point.y);
+    circle.setAttribute('r', '10');
+    circle.setAttribute('fill', arch.color || '#3b82f6');
+    circle.setAttribute('stroke', '#fff');
+    circle.setAttribute('stroke-width', '2');
+    svg.appendChild(circle);
+}
+
+function updateScores(arch) {
+    document.getElementById('sov-score').textContent = arch.sovereignty + '%';
+    document.getElementById('per-score').textContent = arch.persistence + '%';
+    document.getElementById('pra-score').textContent = arch.practicality + '%';
+    
+    document.getElementById('sov-bar').style.width = arch.sovereignty + '%';
+    document.getElementById('per-bar').style.width = arch.persistence + '%';
+    document.getElementById('pra-bar').style.width = arch.practicality + '%';
+    
+    const total = arch.sovereignty + arch.persistence + arch.practicality;
+    document.getElementById('total-score').textContent = total;
+}
+
+function updateCustomArch() {
+    customArchitecture.sovereignty = parseInt(document.getElementById('sov-slider').value);
+    customArchitecture.persistence = parseInt(document.getElementById('per-slider').value);
+    customArchitecture.practicality = parseInt(document.getElementById('pra-slider').value);
+    
+    document.getElementById('custom-sov').textContent = customArchitecture.sovereignty + '%';
+    document.getElementById('custom-per').textContent = customArchitecture.persistence + '%';
+    document.getElementById('custom-pra').textContent = customArchitecture.practicality + '%';
+    
+    renderTriangle('custom-triangle-svg', customArchitecture);
+    updateCustomTotal();
+}
+
+function updateCustomTotal() {
+    const total = customArchitecture.sovereignty + customArchitecture.persistence + customArchitecture.practicality;
+    document.getElementById('custom-total-value').textContent = total;
+    
+    const totalDiv = document.getElementById('custom-total');
+    const warning = document.getElementById('custom-warning');
+    
+    if (total > 200) {
+        totalDiv.className = 'total-score invalid';
+        warning.style.display = 'block';
+        document.getElementById('custom-total-value').style.color = '#ff6b6b';
+    } else {
+        totalDiv.className = 'total-score valid';
+        warning.style.display = 'none';
+        document.getElementById('custom-total-value').style.color = '#00ffaa';
+    }
+}
+
+function visualizeCustom() {
+    selectedArchitecture = {
+        name: 'Custom Architecture',
+        ...customArchitecture,
+        color: '#3b82f6',
+        description: 'Custom trilemma configuration'
+    };
+    renderArchitectureGrid();
+    renderTriangle('triangle-svg', selectedArchitecture);
+    updateScores(selectedArchitecture);
+    document.getElementById('selected-arch-name').textContent = selectedArchitecture.name;
+    document.getElementById('selected-arch-description').textContent = selectedArchitecture.description;
+    document.getElementById('trilemma-position').textContent = getTrilemmaPosition(selectedArchitecture);
+}
+
 </script>
