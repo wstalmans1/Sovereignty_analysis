@@ -1300,6 +1300,24 @@
                             
                             <div style="margin-bottom: 20px;">
                                 <p style="margin-bottom: 8px;">
+                                    <strong>In-Browser Helia (IPFS) - Sovereignty + Practicality, Sacrifice Persistence</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    IPFS runs directly in the browser using Helia JavaScript library. No server setup required—just include the library. High sovereignty as user controls their own IPFS node. But data only persists while browser tab is open, or if content is pinned by other nodes. Very ephemeral. Sovereignty: 80%, Persistence: 15%, Practicality: 85%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
+                                    <strong>In-Browser Helia + Pinata Pinning - Persistence + Practicality, Sacrifice Sovereignty</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    Helia runs in browser providing IPFS functionality, combined with Pinata pinning service for persistence. While browser-based IPFS provides some sovereignty, heavy dependence on Pinata's centralized pinning service significantly reduces it. Good persistence through Pinata's infrastructure and easy to use, but sovereignty is compromised. Sovereignty: 45%, Persistence: 75%, Practicality: 80%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
                                     <strong style="color: #00ffff;">Self-Hosted IPFS Cluster - Maximum Sovereignty + Some Persistence, Moderate Practicality</strong>
                                 </p>
                                 <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
@@ -2982,6 +3000,22 @@ const TRILEMMA_ARCHITECTURES = [
         practicality: 50,
         color: '#06b6d4',
         description: 'User runs single IPFS node. Full infrastructure control, but no redundancy. Data persists only while node is running. User fully responsible'
+    },
+    {
+        name: 'In-Browser Helia (IPFS)',
+        sovereignty: 80,
+        persistence: 15,
+        practicality: 85,
+        color: '#3b82f6',
+        description: 'IPFS runs directly in the browser using Helia. High sovereignty, no server setup, but data only persists while browser is open or if pinned elsewhere. Very ephemeral'
+    },
+    {
+        name: 'In-Browser Helia + Pinata Pinning',
+        sovereignty: 45,
+        persistence: 75,
+        practicality: 80,
+        color: '#6366f1',
+        description: 'Helia in browser with Pinata pinning service. Browser-based IPFS provides some sovereignty, but heavily dependent on Pinata centralized service for persistence. Good persistence and practicality, but sovereignty compromised'
     },
     {
         name: 'Self-Hosted IPFS Cluster',
