@@ -1350,7 +1350,7 @@
                     <div class="trilemma-card">
                         <h3 id="selected-arch-name">Mutual IPFS Pinning Network</h3>
                         <div class="triangle-chart">
-                            <svg id="triangle-svg" class="triangle-svg" viewBox="0 0 400 400"></svg>
+                            <svg id="triangle-svg" class="triangle-svg" viewBox="-60 -60 520 520"></svg>
                         </div>
                         <div style="margin-top: 20px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 8px;">
                             <p id="selected-arch-description" style="font-size: 0.9rem; color: #8888aa; margin: 0;">
@@ -1463,7 +1463,7 @@
                         
                         <div>
                             <div class="triangle-chart">
-                                <svg id="custom-triangle-svg" class="triangle-svg" viewBox="0 0 400 400"></svg>
+                                <svg id="custom-triangle-svg" class="triangle-svg" viewBox="-60 -60 520 520"></svg>
                             </div>
                         </div>
                     </div>
@@ -2735,9 +2735,9 @@ function renderTriangle(svgId, arch) {
     
     // Triangle vertices
     const vertices = {
-        sovereignty: { x: center, y: 60 },
+        sovereignty: { x: center - radius * 0.866, y: center + radius * 0.5 },
         persistence: { x: center + radius * 0.866, y: center + radius * 0.5 },
-        practicality: { x: center - radius * 0.866, y: center + radius * 0.5 }
+        practicality: { x: center, y: 60 }
     };
     
     // Draw triangle
@@ -2777,16 +2777,16 @@ function renderTriangle(svgId, arch) {
     
     // Labels
     const labels = [
-        { text: 'Sovereignty', x: vertices.sovereignty.x, y: vertices.sovereignty.y - 15, fill: '#00ffff' },
-        { text: 'Persistence', x: vertices.persistence.x + 20, y: vertices.persistence.y + 5, fill: '#00ffaa' },
-        { text: 'Practicality', x: vertices.practicality.x - 20, y: vertices.practicality.y + 5, fill: '#ff00ff' }
+        { text: 'Sovereignty', x: vertices.sovereignty.x - 35, y: vertices.sovereignty.y + 20, fill: '#00ffff' },
+        { text: 'Persistence', x: vertices.persistence.x + 35, y: vertices.persistence.y + 20, fill: '#00ffaa' },
+        { text: 'Practicality', x: vertices.practicality.x, y: vertices.practicality.y - 30, fill: '#ff00ff' }
     ];
     
     labels.forEach(label => {
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', label.x);
         text.setAttribute('y', label.y);
-        text.setAttribute('text-anchor', label.text === 'Sovereignty' ? 'middle' : (label.text === 'Persistence' ? 'start' : 'end'));
+        text.setAttribute('text-anchor', label.text === 'Practicality' ? 'middle' : (label.text === 'Persistence' ? 'start' : 'end'));
         text.setAttribute('fill', label.fill);
         text.setAttribute('font-weight', '700');
         text.setAttribute('font-size', '14');
