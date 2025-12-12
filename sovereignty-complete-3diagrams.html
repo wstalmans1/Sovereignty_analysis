@@ -1318,6 +1318,15 @@
                             
                             <div style="margin-bottom: 20px;">
                                 <p style="margin-bottom: 8px;">
+                                    <strong>In-Browser Helia + Storacha - Persistence + Practicality, Moderate Sovereignty</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                    Helia in browser with Storacha pinning + automatic Filecoin deals. Better sovereignty than Pinata (uses decentralized Filecoin network for storage), higher persistence through Filecoin's cryptographic storage proofs. Centralized API access point but decentralized storage backend. More honest about using decentralized tech. Sovereignty: 50%, Persistence: 85%, Practicality: 80%.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin-bottom: 8px;">
                                     <strong style="color: #00ffff;">Self-Hosted IPFS Cluster - Maximum Sovereignty + Some Persistence, Moderate Practicality</strong>
                                 </p>
                                 <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
@@ -1487,6 +1496,187 @@
                                 <svg id="custom-triangle-svg" class="triangle-svg" viewBox="-60 -60 520 520"></svg>
                             </div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Case Study: Browser-Based DApp with Helia -->
+                <div style="background: rgba(0, 255, 255, 0.1); border: 2px solid #00ffff; border-radius: 15px; padding: 30px; margin: 40px 0;">
+                    <h3 style="color: #00ffff; margin-top: 0; font-size: 1.5rem; margin-bottom: 20px;">📚 Case Study: Browser-Based DApp with Helia</h3>
+                    
+                    <div style="background: rgba(0, 0, 0, 0.3); border-left: 4px solid #00ffff; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                        <h4 style="color: #00ffff; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">The Setup</h4>
+                        <p style="margin-bottom: 15px;">
+                            A client-side only DApp running entirely in the browser. Using Helia (JavaScript IPFS implementation) means:
+                        </p>
+                        <ul style="line-height: 1.8; margin-left: 20px; color: #e0e0ff;">
+                            <li><strong>No installation required:</strong> Helia comes bundled in the DApp JavaScript</li>
+                            <li><strong>Immediate participation:</strong> Users join the IPFS network as soon as they open the webpage</li>
+                            <li><strong>High sovereignty:</strong> Each user runs their own IPFS node in the browser</li>
+                            <li><strong>High practicality:</strong> Zero setup complexity for end users</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic; color: #8888aa;">
+                            But what about persistence? Data only exists while the browser is open...
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                        <h4 style="color: #00ffaa; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">Persistence Options for Helia</h4>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;"><strong>1. Browser Storage Only</strong></p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Data in IndexedDB/browser cache. Persists between sessions but lost if cache cleared. <strong>Persistence: ~15%</strong>
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;"><strong>2. User Keeps Browser Open</strong></p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Helia node runs continuously while tab open. Content pinned and served while active. <strong>Persistence: ~25%</strong>
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;"><strong>3. Mutual Peer Pinning</strong></p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Other users' browsers pin your content. Survives as long as someone is online pinning it. <strong>Persistence: ~40%</strong>
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;"><strong>4. Service Worker</strong></p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Background process keeps Helia running even when tab closed. <strong>Persistence: ~35% (solo), ~50% (with peer pinning)</strong>
+                            </p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="margin-bottom: 8px;"><strong>5. Dedicated Always-On Node</strong></p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                User also runs Kubo daemon. Browser DApp coordinates with always-on node. <strong>Persistence: ~70% (solo), ~85% (with peer pinning)</strong>
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <p style="margin-bottom: 8px;"><strong>6. Add Filecoin Layer</strong></p>
+                            <p style="font-size: 0.95rem; color: #8888aa; margin-left: 20px;">
+                                Helia for immediate access, Filecoin deals for long-term archival. <strong>Persistence: ~90% (but sovereignty drops to ~30%)</strong>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 170, 0, 0.1); border-left: 4px solid #ffaa00; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                        <h4 style="color: #ffaa00; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">The Hybrid Approach: Helia + Pinning Service</h4>
+                        
+                        <p style="margin-bottom: 20px;">
+                            For maximum persistence with minimal complexity, adding a pinning service creates a <strong>tiered persistence strategy</strong>:
+                        </p>
+                        
+                        <div style="background: rgba(0, 0, 0, 0.4); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h5 style="color: #00ffff; margin-top: 0; margin-bottom: 15px;">Layer 1: Helia (Immediate + Sovereignty)</h5>
+                            <ul style="line-height: 1.8; margin-left: 20px; color: #e0e0ff;">
+                                <li>User uploads → Helia adds to IPFS</li>
+                                <li>Available instantly via their browser node</li>
+                                <li>Other Helia users can fetch peer-to-peer</li>
+                                <li><strong>Sovereignty: 80%, Persistence: 15%, Practicality: 85%</strong></li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(0, 0, 0, 0.4); padding: 20px; border-radius: 8px;">
+                            <h5 style="color: #00ffaa; margin-top: 0; margin-bottom: 15px;">Layer 2: Pinning Service (Reliability Backup)</h5>
+                            <ul style="line-height: 1.8; margin-left: 20px; color: #e0e0ff;">
+                                <li>Same content automatically backed up to pinning service</li>
+                                <li>Guarantees long-term availability</li>
+                                <li>Fallback if peer network fails</li>
+                                <li>Retrieval strategy: Your Helia → Peer Helia → Pinning Service → Public gateways</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(100, 50, 200, 0.1); border-left: 4px solid #a855f7; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                        <h4 style="color: #a855f7; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">Comparison: Helia + Pinata vs Helia + Storacha</h4>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px;">
+                                <h5 style="color: #6366f1; margin-top: 0; margin-bottom: 10px;">Helia + Pinata</h5>
+                                <ul style="line-height: 1.7; font-size: 0.9rem; color: #e0e0ff;">
+                                    <li><strong>IPFS Pinning:</strong> Pinata servers (centralized)</li>
+                                    <li><strong>Long-term Storage:</strong> Pinata servers (centralized)</li>
+                                    <li><strong>Centralization:</strong> Fully centralized</li>
+                                    <li><strong>Exit Strategy:</strong> Migrate to new pinner</li>
+                                    <li><strong>Sovereignty:</strong> 45%</li>
+                                    <li><strong>Persistence:</strong> 75%</li>
+                                    <li><strong>Practicality:</strong> 80%</li>
+                                    <li><strong>Cost:</strong> ~$20/month for 1TB</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px;">
+                                <h5 style="color: #00ffaa; margin-top: 0; margin-bottom: 10px;">Helia + Storacha</h5>
+                                <ul style="line-height: 1.7; font-size: 0.9rem; color: #e0e0ff;">
+                                    <li><strong>IPFS Pinning:</strong> Storacha servers (centralized API)</li>
+                                    <li><strong>Long-term Storage:</strong> Filecoin network (decentralized)</li>
+                                    <li><strong>Centralization:</strong> Centralized API → Decentralized storage</li>
+                                    <li><strong>Exit Strategy:</strong> Content exists on Filecoin (provable)</li>
+                                    <li><strong>Sovereignty:</strong> 50%</li>
+                                    <li><strong>Persistence:</strong> 85%</li>
+                                    <li><strong>Practicality:</strong> 80%</li>
+                                    <li><strong>Cost:</strong> ~$50-100/month (includes Filecoin deals)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                            <h5 style="color: #00ffff; margin-top: 0; margin-bottom: 10px;">Key Difference</h5>
+                            <p style="margin-bottom: 10px; color: #e0e0ff;">
+                                <strong>Pinata:</strong> Pure IPFS pinning service (centralized storage)
+                            </p>
+                            <p style="color: #e0e0ff;">
+                                <strong>Storacha:</strong> IPFS pinning + automatic Filecoin deals (decentralized storage protocol)
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 107, 107, 0.1); border-left: 4px solid #ff6b6b; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                        <h4 style="color: #ff6b6b; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">The Honest Tradeoff</h4>
+                        
+                        <p style="margin-bottom: 15px;">
+                            <strong>Helia + Storacha</strong> provides a better philosophical fit for sovereignty-conscious applications:
+                        </p>
+                        
+                        <ul style="line-height: 1.8; margin-left: 20px; color: #e0e0ff;">
+                            <li>✅ Uses decentralized storage protocol (Filecoin) under the hood</li>
+                            <li>✅ Content cryptographically proven on distributed network</li>
+                            <li>✅ Less vendor lock-in (content exists on Filecoin, not just Storacha)</li>
+                            <li>✅ More honest about using decentralized tech</li>
+                        </ul>
+                        
+                        <p style="margin-top: 15px; color: #8888aa; font-style: italic;">
+                            But still requires Storacha API (centralized chokepoint) and Filecoin deals take hours/days (though IPFS layer is immediate).
+                        </p>
+                        
+                        <p style="margin-top: 20px; font-size: 1.05rem; color: #00ffff; font-weight: 700;">
+                            The honest architecture: "We maximize sovereignty where possible (p2p layer), accept centralization where necessary (persistence guarantee), transparent about the tradeoff."
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 170, 0.1); border-left: 4px solid #00ffaa; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                        <h4 style="color: #00ffaa; margin-top: 0; font-size: 1.2rem; margin-bottom: 15px;">Recommendation</h4>
+                        
+                        <p style="margin-bottom: 15px;"><strong>Choose Storacha if:</strong></p>
+                        <ul style="line-height: 1.8; margin-left: 20px; color: #e0e0ff; margin-bottom: 20px;">
+                            <li>You value underlying decentralization (even if access is centralized)</li>
+                            <li>You want cryptographic storage proofs</li>
+                            <li>You want to honestly say "backed by Filecoin"</li>
+                            <li>Long-term archival matters (Filecoin deals = provable persistence)</li>
+                        </ul>
+                        
+                        <p style="margin-bottom: 15px;"><strong>Choose Pinata if:</strong></p>
+                        <ul style="line-height: 1.8; margin-left: 20px; color: #e0e0ff;">
+                            <li>Cost matters more</li>
+                            <li>You're pragmatic about "decentralization theater"</li>
+                            <li>Faster/simpler for MVP</li>
+                        </ul>
                     </div>
                 </div>
                 
@@ -3016,6 +3206,14 @@ const TRILEMMA_ARCHITECTURES = [
         practicality: 80,
         color: '#6366f1',
         description: 'Helia in browser with Pinata pinning service. Browser-based IPFS provides some sovereignty, but heavily dependent on Pinata centralized service for persistence. Good persistence and practicality, but sovereignty compromised'
+    },
+    {
+        name: 'In-Browser Helia + Storacha',
+        sovereignty: 50,
+        persistence: 85,
+        practicality: 80,
+        color: '#10b981',
+        description: 'Helia in browser with Storacha pinning + Filecoin deals. Better sovereignty than Pinata (uses decentralized Filecoin storage), higher persistence through Filecoin network. Centralized API but decentralized storage backend'
     },
     {
         name: 'Self-Hosted IPFS Cluster',
